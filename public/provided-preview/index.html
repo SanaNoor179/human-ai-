@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMAN OR AI? — 15-Round Visual Experiment</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins & Newsreader -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        offwhite: '#F5F4EF',
+                        dark: '#111111',
+                        muted: '#777777',
+                        line: '#D9D9D4',
+                        accent: '#2A4365', // Muted Deep Cobalt
+                        accentHover: '#1A365D',
+                        correctBg: '#E6F4EA',
+                        correctText: '#137333',
+                        incorrectBg: '#FCE8E6',
+                        incorrectText: '#C5221F'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Newsreader', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="carousel/carousel.css">
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-accent selection:text-white">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-[#F5F4EF]/90 backdrop-blur-md border-b border-line">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <button onclick="navigateTo('home')" class="font-bold tracking-wider text-sm uppercase text-dark hover:opacity-70 transition">
+                HUMAN OR AI?
+            </button>
+            <nav class="flex items-center space-x-6 text-xs font-medium tracking-widest uppercase">
+                <button onclick="startTest()" class="text-muted hover:text-dark transition">THE TEST</button>
+                <button onclick="scrollToAbout()" class="text-muted hover:text-dark transition">ABOUT</button>
+                <button onclick="navigateTo('contact')" class="text-muted hover:text-dark transition">CONTACT</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-6 py-8">
+
+        <!-- ==================== SCREEN 1: HOME ==================== -->
+        <section id="screen-home" class="space-y-16 py-4">
+            <!-- TITLE + PAGE CAROUSEL (React Bits Circular Carousel, see carousel-src/) -->
+            <div class="space-y-6">
+                <div class="space-y-6">
+                    <span class="inline-block text-xs font-semibold uppercase tracking-widest text-accent border border-accent/20 bg-accent/5 px-3 py-1 rounded-full">
+                            15-Round Visual Experiment
+                        </span>
+                        <h1 class="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight leading-none text-dark">
+                            HUMAN <span class="font-serif italic text-muted">OR</span> AI?
+                        </h1>
+                </div>
+                <div id="home-carousel" role="region" aria-label="Browse the site" class="home-carousel-bleed relative" style="height: clamp(400px, 34.5vw, 700px);"></div>
+            </div>
+        </section>
+
+        <!-- ==================== SCREEN 2: GUESS ==================== -->
+        <section id="screen-guess" class="hidden max-w-4xl mx-auto py-4 space-y-6">
+            <!-- HEADER METADATA & PROGRESS -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-line pb-4 gap-4">
+                <div>
+                    <div class="flex items-center space-x-3">
+                        <span id="guess-round-label" class="text-xs font-mono font-semibold tracking-widest text-muted uppercase">ROUND 01 / 15</span>
+                        <span id="guess-difficulty-badge" class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-dark text-offwhite rounded">DIFFICULTY: BEGINNER</span>
+                    </div>
+                    <h2 class="text-xl font-medium text-dark mt-1">Who made this?</h2>
+                </div>
+                <!-- COMPACT PROGRESS BAR -->
+                <div class="w-full sm:w-48 space-y-1">
+                    <div class="flex justify-between text-[11px] font-mono text-muted">
+                        <span>Progress</span>
+                        <span id="progress-percent-text">7%</span>
+                    </div>
+                    <div class="w-full bg-line h-2 rounded-full overflow-hidden">
+                        <div id="progress-bar-fill" class="bg-dark h-full smooth-transition" style="width: 7%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAIN IMAGE CONTAINER -->
+            <div class="bg-white p-3 rounded-xl border border-line shadow-sm space-y-4">
+                <div class="relative w-full aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-lg bg-offwhite flex items-center justify-center zoom-inspect cursor-zoom-in">
+                    <img onclick="openImageFullscreen('guess-image')" title="Click to view fullscreen" id="guess-image" src="" alt="Creative Test Subject" class="w-full h-full object-cover smooth-transition">
+                </div>
+            </div>
+
+            <div id="pending-round-notice" class="hidden bg-white border border-line rounded-xl p-4 text-sm text-muted">Image pending upload. <button onclick="skipPendingRound()" class="underline font-semibold text-dark">Skip this round for now →</button></div>
+            <div id="provisional-round-notice" class="hidden bg-white border border-line rounded-xl p-4 text-xs text-muted">Temporary original quiz image — awaiting your replacement.</div>
+            <!-- CHOICE SECTION -->
+            <div class="space-y-4 text-center max-w-xl mx-auto pt-2">
+                <p class="text-sm font-medium text-dark">What is your first impression?</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="submitGuess('HUMAN')" class="p-5 border-2 border-line hover:border-dark bg-white rounded-xl text-dark font-semibold tracking-wider text-sm uppercase smooth-transition hover:shadow-md flex flex-col items-center justify-center space-y-1 group">
+                        <span class="group-hover:text-accent smooth-transition">HUMAN MADE</span>
+                        <span class="text-[10px] font-normal text-muted uppercase">Human Artist / Craft</span>
+                    </button>
+                    <button onclick="submitGuess('AI')" class="p-5 border-2 border-line hover:border-dark bg-white rounded-xl text-dark font-semibold tracking-wider text-sm uppercase smooth-transition hover:shadow-md flex flex-col items-center justify-center space-y-1 group">
+                        <span class="group-hover:text-accent smooth-transition">AI GENERATED</span>
+                        <span class="text-[10px] font-normal text-muted uppercase">Algorithmically Synthesized</span>
+                    </button>
+                </div>
+                <p class="text-xs text-muted italic">Choose before you overthink it.</p>
+            </div>
+        </section>
+
+        <!-- ==================== SCREEN 3: REVEAL ==================== -->
+        <section id="screen-reveal" class="hidden max-w-4xl mx-auto py-4 space-y-8">
+            <!-- REVEAL HEADER -->
+            <div class="flex items-center justify-between border-b border-line pb-4">
+                <div>
+                    <span id="reveal-round-label" class="text-xs font-mono font-semibold tracking-widest text-muted uppercase">ROUND 01 REVEAL</span>
+                    <h2 class="text-xl font-medium text-dark mt-1">Visual Analysis</h2>
+                </div>
+                <!-- RESULT BADGE -->
+                <div id="reveal-status-badge" class="px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase">
+                    <!-- CORRECT / INCORRECT -->
+                </div>
+            </div>
+
+            <!-- GRID COMPARISON -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                <!-- IMAGE PREVIEW -->
+                <div class="md:col-span-6 bg-white p-2 rounded-xl border border-line">
+                    <div class="relative aspect-square md:aspect-[4/3] rounded-lg overflow-hidden">
+                        <img onclick="openImageFullscreen('reveal-image')" title="Click to view fullscreen" id="reveal-image" src="" alt="Revealed Item" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- REVEAL DETAILS -->
+                <div class="md:col-span-6 space-y-6">
+                    <div class="space-y-2 border-b border-line pb-6">
+                        <span class="text-xs font-mono uppercase text-muted tracking-widest">ACTUAL ORIGIN</span>
+                        <h3 id="reveal-actual-type" class="text-4xl font-bold text-dark tracking-tight">
+                            AI GENERATED
+                        </h3>
+                        <p class="text-xs text-muted">You guessed: <span id="reveal-user-guess" class="font-semibold text-dark">HUMAN MADE</span></p>
+                    </div>
+
+                    <!-- EXPLANATION CARD -->
+                    <div class="bg-white p-5 rounded-xl border border-line space-y-2">
+                        <span class="text-[11px] font-semibold uppercase tracking-wider text-accent">Key Cues & Micro-Details</span>
+                        <p id="reveal-explanation" class="text-xs sm:text-sm text-dark/80 leading-relaxed">
+                            Explanation text.
+                        </p>
+                    </div>
+
+                    <!-- INFLUENCE FACTORS MULTI-SELECT -->
+                    <div class="space-y-3">
+                        <label class="block text-xs font-semibold tracking-wider text-dark uppercase">
+                            What influenced your choice? <span class="text-muted font-normal">(Select all that apply)</span>
+                        </label>
+                        <div class="flex flex-wrap gap-2" id="factor-tags-container">
+                            <!-- Dynamic Factor Pills -->
+                        </div>
+                    </div>
+
+                    <!-- CTA TO NEXT ROUND -->
+                    <div class="pt-4">
+                        <button onclick="nextRound()" class="w-full py-4 bg-dark text-offwhite rounded-xl text-sm font-semibold tracking-wider uppercase hover:bg-accent smooth-transition flex items-center justify-center space-x-2">
+                            <span id="next-button-text">Next Round →</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SCREEN 4: RESULTS ==================== -->
+        <section id="screen-results" class="hidden max-w-4xl mx-auto py-4 space-y-12">
+            <!-- RESULTS HERO SCORE -->
+            <div class="text-center space-y-4 border-b border-line pb-10">
+                <span class="text-xs font-semibold uppercase tracking-widest text-accent border border-accent/20 bg-accent/5 px-3 py-1 rounded-full">
+                    15-Round Analysis Complete
+                </span>
+                <h2 class="text-4xl sm:text-5xl font-light text-dark tracking-tight">YOUR RESULTS</h2>
+                <div class="inline-block bg-white border border-line px-10 py-6 rounded-2xl shadow-sm">
+                    <span id="results-score-number" class="text-6xl sm:text-7xl font-bold text-dark tracking-tight">0 / 15</span>
+                    <p id="results-score-text" class="text-sm text-muted mt-2 font-medium">Your score will appear here.</p>
+                </div>
+            </div>
+
+            <!-- DIFFICULTY BREAKDOWN & ORIGIN MATRIX -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- DIFFICULTY ACCURACY -->
+                <div class="bg-white p-6 rounded-xl border border-line space-y-4">
+                    <h3 class="text-xs font-semibold tracking-widest text-muted uppercase">PERFORMANCE BY DIFFICULTY TIER</h3>
+                    <div class="space-y-4" id="tier-breakdown-list">
+                        <!-- Dynamic Tier Accuracy Bars -->
+                    </div>
+                </div>
+
+                <!-- ORIGIN BREAKDOWN -->
+                <div class="bg-white p-6 rounded-xl border border-line space-y-4">
+                    <h3 class="text-xs font-semibold tracking-widest text-muted uppercase">CREATOR RECOGNITION ACCURACY</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span>Human-Made Works Accuracy</span>
+                                <span id="human-acc-text">0%</span>
+                            </div>
+                            <div class="w-full bg-offwhite h-3 rounded-full overflow-hidden border border-line">
+                                <div id="human-acc-bar" class="bg-dark h-full smooth-transition" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span>AI-Generated Works Accuracy</span>
+                                <span id="ai-acc-text">0%</span>
+                            </div>
+                            <div class="w-full bg-offwhite h-3 rounded-full overflow-hidden border border-line">
+                                <div id="ai-acc-bar" class="bg-accent h-full smooth-transition" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INFLUENCE FACTORS MATRIX -->
+            <div class="bg-white p-6 rounded-xl border border-line space-y-4">
+                <h3 class="text-xs font-semibold tracking-widest text-muted uppercase">PRIMARY FACTORS THAT INFLUENCED YOUR DECISIONS</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="factors-breakdown-list">
+                    <!-- Dynamic Factors Breakdown -->
+                </div>
+            </div>
+
+            <!-- INSIGHT CALLOUT -->
+            <div class="bg-dark text-offwhite p-8 md:p-10 rounded-2xl space-y-4 relative overflow-hidden">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-line/60">EXPERIMENTAL SUMMARY</span>
+                <blockquote class="text-2xl sm:text-3xl font-serif italic text-offwhite leading-snug">
+                    “Sometimes we respond to the work before we know who made it.”
+                </blockquote>
+                <p class="text-xs sm:text-sm text-line/80 leading-relaxed max-w-2xl">
+                    This experiment explores how authorship, visual quality, micro-details, texture grain, and perceived effort shape audience response to modern creative output.
+                </p>
+            </div>
+
+            <!-- FINAL CTAS -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <button onclick="restartTest()" class="w-full sm:w-auto px-8 py-4 bg-dark text-offwhite rounded-xl text-sm font-semibold tracking-wider uppercase hover:bg-accent smooth-transition">
+                    Retake 15-Round Test
+                </button>
+                <button onclick="navigateTo('contact')" class="w-full sm:w-auto px-8 py-4 bg-white border border-line text-dark rounded-xl text-sm font-semibold tracking-wider uppercase hover:border-dark smooth-transition">
+                    Get in Touch
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== SCREEN: ABOUT ==================== -->
+        <section id="screen-about" class="hidden py-4">
+            <div id="about-section" class="py-12 border-b border-line scroll-mt-20">
+                <div class="max-w-3xl space-y-6">
+                    <span class="text-xs font-semibold tracking-widest uppercase text-muted">About The Experiment</span>
+                    <h2 class="text-3xl font-light text-dark tracking-tight leading-tight">
+                        From Human-Made to AI-Generated: Exploring How Creative Content Influences Audience Perception.
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 text-sm text-muted leading-relaxed">
+                        <p>
+                            As synthetic generation tools rapidly advance, distinguishing between human craftsmanship and algorithmic synthesis challenges our intuitive assumptions about art, authenticity, and visual effort.
+                        </p>
+                        <p>
+                            Across 15 rounds of increasing complexity, this test evaluates whether subtle micro-details, light diffusion, stroke chaos, and texture grain impact your ability to discern genuine human authorial intent.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SCREEN: IMAGE ARCHIVE ==================== -->
+        <section id="screen-archive" class="hidden space-y-8 py-4">
+            <div class="border-b border-line pb-6 space-y-2">
+                <span class="text-xs font-semibold tracking-widest uppercase text-accent">Gallery</span>
+                <h2 class="text-4xl font-bold text-dark tracking-tight">IMAGE ARCHIVE</h2>
+                <p class="text-muted text-sm">Every image from the experiment in one place. Click any image to view it fullscreen.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-1" src="images/fox.jpg" alt="Archive image 1" loading="lazy" onclick="openImageFullscreen('archive-img-1')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-2" src="images/panda.jpg" alt="Archive image 2" loading="lazy" onclick="openImageFullscreen('archive-img-2')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-3" src="images/ai-portrait.jpg" alt="Archive image 3" loading="lazy" onclick="openImageFullscreen('archive-img-3')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-4" src="images/human-portrait.jpg" alt="Archive image 4" loading="lazy" onclick="openImageFullscreen('archive-img-4')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-5" src="images/ai-oil-painting.jpg" alt="Archive image 5" loading="lazy" onclick="openImageFullscreen('archive-img-5')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-6" src="images/human-oil-painting.jpg" alt="Archive image 6" loading="lazy" onclick="openImageFullscreen('archive-img-6')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-7" src="images/florida-lake.jpg" alt="Archive image 7" loading="lazy" onclick="openImageFullscreen('archive-img-7')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-8" src="images/ai-lake.jpg" alt="Archive image 8" loading="lazy" onclick="openImageFullscreen('archive-img-8')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-9" src="images/lions.jpg" alt="Archive image 9" loading="lazy" onclick="openImageFullscreen('archive-img-9')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-10" src="images/building-real.jpg" alt="Archive image 10" loading="lazy" onclick="openImageFullscreen('archive-img-10')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-11" src="images/product-real.jpg" alt="Archive image 11" loading="lazy" onclick="openImageFullscreen('archive-img-11')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-12" src="images/product-ai.jpg" alt="Archive image 12" loading="lazy" onclick="openImageFullscreen('archive-img-12')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-13" src="images/car-ai.png" alt="Archive image 13" loading="lazy" onclick="openImageFullscreen('archive-img-13')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-14" src="images/man-ai.jpg" alt="Archive image 14" loading="lazy" onclick="openImageFullscreen('archive-img-14')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line bg-white aspect-square">
+                    <img id="archive-img-15" src="images/cat-ai.webp" alt="Archive image 15" loading="lazy" onclick="openImageFullscreen('archive-img-15')" title="Click to view fullscreen" class="w-full h-full object-cover cursor-zoom-in hover:scale-105 smooth-transition">
+                </div>
+            </div>
+            <div class="flex justify-center pt-2">
+                <button onclick="startTest()" class="px-8 py-4 bg-dark text-offwhite rounded-xl text-sm font-semibold tracking-wider uppercase hover:bg-accent smooth-transition">
+                    Take the Quiz
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== SCREEN 5: CONTACT ==================== -->
+        <section id="screen-contact" class="hidden max-w-3xl mx-auto py-4 space-y-8">
+            <div class="border-b border-line pb-6 space-y-2">
+                <span class="text-xs font-semibold tracking-widest uppercase text-accent">Connect & Feedback</span>
+                <h2 class="text-4xl font-bold text-dark tracking-tight">CONTACT</h2>
+                <p class="text-muted text-sm">Have feedback on the experiment or want to discuss creative research? Send a message below.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <!-- FORM -->
+                <form onsubmit="handleContactSubmit(event)" class="md:col-span-8 space-y-4 bg-white p-6 rounded-xl border border-line">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-dark">Name</label>
+                        <input type="text" required placeholder="Your full name" class="w-full px-4 py-3 bg-offwhite border border-line rounded-lg text-sm text-dark focus:outline-none focus:border-dark smooth-transition">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-dark">Email</label>
+                        <input type="email" required placeholder="name@domain.com" class="w-full px-4 py-3 bg-offwhite border border-line rounded-lg text-sm text-dark focus:outline-none focus:border-dark smooth-transition">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-dark">Subject</label>
+                        <div class="relative">
+                            <select class="w-full pl-4 pr-12 py-3 bg-offwhite border border-line rounded-lg text-sm text-dark appearance-none focus:outline-none focus:border-dark smooth-transition cursor-pointer">
+                                <option>General Inquiry</option>
+                                <option>Experiment Feedback</option>
+                                <option>Collaboration / Press</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-dark/70">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-dark">Message</label>
+                        <textarea rows="4" required placeholder="Your message..." class="w-full px-4 py-3 bg-offwhite border border-line rounded-lg text-sm text-dark focus:outline-none focus:border-dark smooth-transition"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-dark text-offwhite rounded-lg text-xs font-semibold tracking-wider uppercase hover:bg-accent smooth-transition">
+                        Send Message
+                    </button>
+                    <div id="contact-success" class="hidden p-3 bg-correctBg text-correctText border border-correctText/20 text-xs rounded-lg text-center font-medium">
+                        Thank you! Your message has been sent successfully.
+                    </div>
+                </form>
+
+                <!-- DETAILS -->
+                <div class="md:col-span-4 space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-line space-y-4">
+                        <span class="text-xs font-mono text-muted uppercase tracking-wider">PROJECT DETAILS</span>
+                        <div class="space-y-2 text-xs text-dark/80">
+                            <p class="font-medium text-dark">HUMAN OR AI?</p>
+                            <p>An interactive visual research initiative exploring digital content perception.</p>
+                        </div>
+                        <div class="pt-4 border-t border-line space-y-2 text-xs">
+                            <p class="text-muted font-mono uppercase">Social Handles</p>
+                            <p class="text-dark font-medium">@humanorai_experiment</p>
+                            <p class="text-dark font-medium">research@humanorai.design</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-line bg-[#F5F4EF] py-8 text-center text-xs text-muted">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>HUMAN OR AI? — 15-Round Visual Experiment</p>
+            <div class="flex items-center space-x-4">
+                <button onclick="navigateTo('contact')" class="hover:text-dark transition">Contact</button>
+                <span>•</span>
+                <span class="font-mono text-[11px]">15-Round Interactive Build</span>
+            </div>
+        </div>
+    </footer>
+
+    <div id="image-fullscreen-viewer" role="dialog" aria-modal="true" aria-label="Fullscreen image viewer" class="hidden fixed inset-0 z-[100] bg-black/95 items-center justify-center p-4" onclick="if(event.target === this) closeImageFullscreen()">
+    <button id="close-fullscreen" type="button" onclick="closeImageFullscreen()" aria-label="Close fullscreen image" class="absolute top-4 right-5 text-white text-4xl leading-none z-10">&times;</button>
+    <img id="fullscreen-image" src="" alt="Enlarged quiz image" class="max-w-full max-h-[90vh] object-contain" />
+</div>
+<!-- JAVASCRIPT APP LOGIC -->
+    <script src="script.js"></script>
+    <script src="carousel/carousel.js"></script>
+</body>
+</html>

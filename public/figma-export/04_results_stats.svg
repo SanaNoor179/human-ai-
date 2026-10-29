@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1460" width="1440" height="1460" fill="none">
+    <rect width="1440" height="1460" fill="#F5F4EF"/>
+    
+    <g id="Header">
+        <rect width="1440" height="64" fill="#F5F4EF"/>
+        <line x1="0" y1="64" x2="1440" y2="64" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="38" fill="#111111" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">HUMAN <tspan font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="400" fill="#777777">OR</tspan> AI?</text>
+        
+            <rect x="948" y="18" width="60" height="28" rx="14" fill="#111111"/>
+            <text x="960" y="36" fill="#F5F4EF" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">HOME</text>
+            
+            <text x="1028" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">THE TEST</text>
+            
+            <text x="1128" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">LIBRARY</text>
+            
+            <text x="1219" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">ABOUT</text>
+            
+            <text x="1292" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">CONTACT</text>
+            
+    </g>
+    
+
+    <g id="Results" transform="translate(260, 95)">
+        <text x="0" y="20" fill="#2A4365" font-family="Poppins, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">PERCEPTION MATRIX &amp; ANALYTICS</text>
+        <text x="0" y="55" fill="#111" font-family="Poppins, sans-serif" font-size="34" font-weight="800">YOUR PERFORMANCE SUMMARY</text>
+        <line x1="0" y1="75" x2="920" y2="75" stroke="#D9D9D4"/>
+
+        <!-- Score Hero -->
+        <g transform="translate(0, 95)">
+            <rect width="920" height="160" rx="20" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="460" y="70" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="64" font-weight="800">80%</text>
+            <text x="460" y="102" text-anchor="middle" fill="#2A4365" font-family="Poppins, sans-serif" font-size="12" font-weight="700">OVERALL ACCURACY SCORE</text>
+            <text x="460" y="128" text-anchor="middle" fill="#777" font-family="Poppins, sans-serif" font-size="14">12 of 15 subjects correctly identified</text>
+        </g>
+
+        <!-- Tier & Bias Grid -->
+        <g transform="translate(0, 280)">
+            <rect width="445" height="240" rx="18" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="24" y="32" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">ACCURACY BY COMPLEXITY TIER</text>
+            <text x="24" y="75" fill="#333" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Beginner Tier</text>
+            <text x="421" y="75" text-anchor="end" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">100% (5/5)</text>
+            <rect x="24" y="85" width="397" height="7" rx="3.5" fill="#111"/>
+            <text x="24" y="130" fill="#333" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Intermediate Tier</text>
+            <text x="421" y="130" text-anchor="end" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">80% (4/5)</text>
+            <rect x="24" y="140" width="318" height="7" rx="3.5" fill="#111"/>
+            <text x="24" y="185" fill="#333" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Advanced Tier</text>
+            <text x="421" y="185" text-anchor="end" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">60% (3/5)</text>
+            <rect x="24" y="195" width="238" height="7" rx="3.5" fill="#111"/>
+
+            <!-- Right: Bias -->
+            <g transform="translate(475, 0)">
+                <rect width="445" height="240" rx="18" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="24" y="32" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">AUTHORSHIP PERCEPTION BIAS</text>
+                <text x="24" y="75" fill="#333" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Human Craft Recognition</text>
+                <text x="421" y="75" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="12" font-weight="700">83%</text>
+                <rect x="24" y="85" width="330" height="7" rx="3.5" fill="#10B981"/>
+                <text x="24" y="130" fill="#333" font-family="Poppins, sans-serif" font-size="12" font-weight="600">AI Synthesis Detection</text>
+                <text x="421" y="130" text-anchor="end" fill="#3B82F6" font-family="Poppins, sans-serif" font-size="12" font-weight="700">78%</text>
+                <rect x="24" y="140" width="310" height="7" rx="3.5" fill="#3B82F6"/>
+                <rect x="24" y="170" width="397" height="52" rx="10" fill="#FAF9F6" stroke="#ECEBE6"/>
+                <text x="36" y="194" fill="#444" font-family="Poppins, sans-serif" font-size="11">Strong discernment of organic optical vignetting and natural falloff.</text>
+            </g>
+        </g>
+
+        <!-- Round-By-Round Breakdown (From Zip File) -->
+        <g transform="translate(0, 545)">
+            <rect width="920" height="340" rx="18" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="24" y="32" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">ROUND-BY-ROUND BREAKDOWN (ALL 15 SUBJECTS)</text>
+            <line x1="24" y1="46" x2="896" y2="46" stroke="#F0EFEA"/>
+
+            <!-- 15 Rounds Grid Mock -->
+            <g transform="translate(24, 60)">
+                <!-- Row 1 -->
+                <rect x="0" y="0" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="12" y="24" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 1 • FOX</text>
+                <text x="268" y="24" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="10" font-weight="700">CORRECT</text>
+                <text x="12" y="44" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">HUMAN MADE</text>
+                <text x="12" y="60" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: Human</text>
+
+                <rect x="295" y="0" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="307" y="24" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 2 • PANDA</text>
+                <text x="563" y="24" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="10" font-weight="700">CORRECT</text>
+                <text x="307" y="44" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">AI GENERATED</text>
+                <text x="307" y="60" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: AI</text>
+
+                <rect x="590" y="0" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="602" y="24" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 3 • AI PORTRAIT</text>
+                <text x="858" y="24" text-anchor="end" fill="#C5221F" font-family="Poppins, sans-serif" font-size="10" font-weight="700">MISSED</text>
+                <text x="602" y="44" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">AI GENERATED</text>
+                <text x="602" y="60" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: Human</text>
+
+                <!-- Row 2 -->
+                <rect x="0" y="85" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="12" y="109" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 4 • HUMAN PORTRAIT</text>
+                <text x="268" y="109" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="10" font-weight="700">CORRECT</text>
+                <text x="12" y="129" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">HUMAN MADE</text>
+                <text x="12" y="145" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: Human</text>
+
+                <rect x="295" y="85" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="307" y="109" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 5 • STILL LIFE</text>
+                <text x="563" y="109" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="10" font-weight="700">CORRECT</text>
+                <text x="307" y="129" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">AI GENERATED</text>
+                <text x="307" y="145" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: AI</text>
+
+                <rect x="590" y="85" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="602" y="109" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 6 • OIL PAINTING</text>
+                <text x="858" y="109" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="10" font-weight="700">CORRECT</text>
+                <text x="602" y="129" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">HUMAN MADE</text>
+                <text x="602" y="145" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: Human</text>
+
+                <!-- More indicator -->
+                <rect x="0" y="170" width="870" height="85" rx="10" fill="#FAF9F6" stroke="#ECEBE6"/>
+                <text x="435" y="205" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Rounds 7 through 15: Lake, Architecture, Lions, Perfume, Car, Denim, Cat</text>
+                <text x="435" y="230" text-anchor="middle" fill="#777" font-family="Poppins, sans-serif" font-size="11">Intermediate &amp; Advanced Tiers • Full Results Logged</text>
+            </g>
+        </g>
+
+        <!-- Quote Card -->
+        <g transform="translate(0, 910)">
+            <rect width="920" height="140" rx="18" fill="#111"/>
+            <text x="28" y="32" fill="rgba(255,255,255,0.5)" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">EXPERIMENTAL SUMMARY</text>
+            <text x="28" y="68" fill="#FFF" font-family="Newsreader, serif" font-style="italic" font-size="22">“Sometimes we respond to the work before we know who made it.”</text>
+            <text x="28" y="102" fill="rgba(255,255,255,0.7)" font-family="Poppins, sans-serif" font-size="12">This experiment explores how authorship, visual quality, micro-details, texture grain, and perceived effort shape audience response.</text>
+        </g>
+
+        <!-- Buttons -->
+        <g transform="translate(210, 1075)">
+            <rect width="230" height="48" rx="24" fill="#111"/>
+            <text x="115" y="29" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="12" font-weight="700">RETAKE 15-ROUND TEST ↺</text>
+            <rect x="250" width="240" height="48" rx="24" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="370" y="29" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">BROWSE IMAGE LIBRARY ↗</text>
+        </g>
+    </g>
+
+    
+    <g id="Footer" transform="translate(0, 1380)">
+        <line x1="150" y1="0" x2="1290" y2="0" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="35" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">HUMAN OR AI? — Interactive Visual Experiment</text>
+        <text x="1290" y="35" text-anchor="end" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">Interactive Design Prototype</text>
+    </g>
+    
+</svg>

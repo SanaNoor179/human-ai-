@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScrollReveal About — Project Details Tab</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #F5F4EF;
+      color: #111111;
+      overflow-x: hidden;
+    }
+    .serif-italic {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+    }
+    /* Scroll reveal tray animation */
+    .reveal-tray {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+    }
+    .reveal-tray.is-revealed {
+      transform: translateY(0) !important;
+      box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body class="min-h-[200vh]">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#F5F4EF]/90 border-b border-[#D9D9D4] backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="font-bold tracking-wider text-sm uppercase text-[#111111]">
+        HUMAN <span class="serif-italic text-[#777777] font-normal">OR</span> AI?
+      </div>
+      <div class="flex items-center gap-4 text-xs font-semibold tracking-wider uppercase text-[#777777]">
+        <span class="text-[#111111]">ScrollReveal Demo</span>
+        <span>•</span>
+        <a href="/provided-preview/index.html" class="hover:text-black transition">Original Zip Preview</a>
+        <span>•</span>
+        <a href="/vanilla-version/index.html" class="hover:text-black transition">Vanilla Version</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Content Section -->
+  <main class="max-w-4xl mx-auto px-6 pt-16 pb-32 text-center">
+    <span class="text-xs font-bold tracking-widest uppercase text-[#2A4365]">Scroll-Triggered Feature</span>
+    <h1 class="text-4xl sm:text-6xl font-extrabold uppercase tracking-tight mt-3 mb-6">
+      SCROLL DOWN TO <span class="serif-italic font-normal text-[#777777]">REVEAL</span>
+    </h1>
+    <p class="text-base text-[#666666] max-w-xl mx-auto leading-relaxed mb-12">
+      As you scroll down the page, the bottom tab activates and slides up smoothly to reveal full project specs, team methodology, and experiment breakdown.
+    </p>
+
+    <!-- Scroll Indicator Arrow -->
+    <div class="animate-bounce inline-flex flex-col items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#777777]">
+      <span>Scroll Down</span>
+      <span class="text-xl">↓</span>
+    </div>
+
+    <!-- Middle Page Spacer Cards -->
+    <div class="mt-28 space-y-6 text-left">
+      <div class="p-8 bg-white rounded-2xl border border-[#D9D9D4] shadow-xs">
+        <h3 class="text-lg font-bold uppercase tracking-wide mb-2">Perceptual Research Layer</h3>
+        <p class="text-sm text-[#555] leading-relaxed">
+          The human eye processes microscopic variances in optical focus, lens vignetting, and skin micro-pores differently than algorithmic approximations. Scroll further to open the project drawer.
+        </p>
+      </div>
+
+      <div class="p-8 bg-white rounded-2xl border border-[#D9D9D4] shadow-xs">
+        <h3 class="text-lg font-bold uppercase tracking-wide mb-2">15 Curated Subjects</h3>
+        <p class="text-sm text-[#555] leading-relaxed">
+          Spanning beginner wildlife photographs, intermediate atmospheric landscapes, and advanced synthetic product renders.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scroll-Triggered Reveal Tray / Drawer -->
+  <aside id="reveal-tray" class="reveal-tray fixed bottom-0 inset-x-0 z-50 transform translate-y-[calc(100%-60px)]">
+    <!-- Grab / Tab Handle -->
+    <div id="tray-handle" class="max-w-xl mx-auto cursor-pointer flex justify-center">
+      <div class="px-6 py-2.5 rounded-t-2xl bg-[#111111] text-[#F5F4EF] border-t border-x border-white/20 shadow-xl inline-flex items-center gap-3 transition-transform hover:-translate-y-1">
+        <span id="tab-indicator" class="w-2.5 h-2.5 rounded-full bg-[#10b981] animate-pulse"></span>
+        <span id="tab-label" class="text-xs font-bold tracking-widest uppercase">Project Details (Slide Up)</span>
+        <span id="arrow-icon" class="text-xs transition-transform duration-300">▲</span>
+      </div>
+    </div>
+
+    <!-- Sliding Drawer Content -->
+    <div class="bg-[#111111] text-[#F5F4EF] border-t border-white/15 px-6 sm:px-12 pt-8 pb-12 shadow-2xl max-h-[80vh] overflow-y-auto">
+      <div class="max-w-4xl mx-auto space-y-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+          <div>
+            <span class="text-[11px] font-bold tracking-widest uppercase text-[#38bdf8]">About Page Drawer</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight mt-1">ScrollReveal About Details</h2>
+          </div>
+          <button id="close-drawer-btn" class="self-start sm:self-auto px-4 py-2 rounded-full border border-white/20 hover:bg-white/10 text-xs font-semibold tracking-wider uppercase transition">
+            ✕ Collapse
+          </button>
+        </div>
+
+        <!-- 3 Feature Columns -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-xl bg-white/5 border border-white/10 space-y-2">
+            <span class="text-xs font-mono text-white/50">01 / DISCOVERY</span>
+            <h4 class="text-sm font-bold uppercase tracking-wider text-white">Scroll-Triggered</h4>
+            <p class="text-xs text-white/70 leading-relaxed">Automatically expands when the user reaches the trigger threshold on the page.</p>
+          </div>
+
+          <div class="p-6 rounded-xl bg-white/5 border border-white/10 space-y-2">
+            <span class="text-xs font-mono text-white/50">02 / INTERACTION</span>
+            <h4 class="text-sm font-bold uppercase tracking-wider text-white">Interactive Handle</h4>
+            <p class="text-xs text-white/70 leading-relaxed">Can be clicked or tapped at any time to toggle between compact tab and full panel.</p>
+          </div>
+
+          <div class="p-6 rounded-xl bg-white/5 border border-white/10 space-y-2">
+            <span class="text-xs font-mono text-white/50">03 / PERFORMANCE</span>
+            <h4 class="text-sm font-bold uppercase tracking-wider text-white">Pure CSS Transforms</h4>
+            <p class="text-xs text-white/70 leading-relaxed">Hardware accelerated with translate3d and smooth spring-like cubic bezier transitions.</p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="pt-4 flex flex-wrap gap-4 items-center justify-center border-t border-white/10 text-xs font-semibold uppercase tracking-wider">
+          <a href="/provided-preview/index.html" class="px-5 py-2.5 rounded-full bg-white text-black hover:bg-neutral-200 transition">Open Extracted Website →</a>
+          <a href="/vanilla-version/index.html" class="px-5 py-2.5 rounded-full border border-white/30 text-white hover:bg-white/10 transition">Open Vanilla Version ↗</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    const tray = document.getElementById('reveal-tray');
+    const handle = document.getElementById('tray-handle');
+    const closeBtn = document.getElementById('close-drawer-btn');
+    const arrow = document.getElementById('arrow-icon');
+    const label = document.getElementById('tab-label');
+
+    let manualToggle = false;
+
+    // Toggle on handle click
+    function toggleTray(forceState) {
+      const isRevealed = forceState !== undefined ? forceState : !tray.classList.contains('is-revealed');
+      if (isRevealed) {
+        tray.classList.add('is-revealed');
+        arrow.style.transform = 'rotate(180deg)';
+        label.textContent = 'Project Details (Click to Close)';
+      } else {
+        tray.classList.remove('is-revealed');
+        arrow.style.transform = 'rotate(0deg)';
+        label.textContent = 'Project Details (Slide Up)';
+      }
+    }
+
+    handle.addEventListener('click', () => {
+      manualToggle = true;
+      toggleTray();
+    });
+
+    closeBtn.addEventListener('click', () => {
+      manualToggle = true;
+      toggleTray(false);
+    });
+
+    // Auto-reveal on scroll threshold
+    window.addEventListener('scroll', () => {
+      if (manualToggle) return;
+      const scrollY = window.scrollY || window.pageYOffset;
+      if (scrollY > 300) {
+        toggleTray(true);
+      } else {
+        toggleTray(false);
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>

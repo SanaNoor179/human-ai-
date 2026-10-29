@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 980" width="1440" height="980" fill="none">
+    <rect width="1440" height="980" fill="#F5F4EF"/>
+    
+    <g id="Header">
+        <rect width="1440" height="64" fill="#F5F4EF"/>
+        <line x1="0" y1="64" x2="1440" y2="64" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="38" fill="#111111" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">HUMAN <tspan font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="400" fill="#777777">OR</tspan> AI?</text>
+        
+            <text x="960" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">HOME</text>
+            
+            <text x="1024" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">THE TEST</text>
+            
+            <text x="1124" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">LIBRARY</text>
+            
+            <rect x="1203" y="18" width="69" height="28" rx="14" fill="#111111"/>
+            <text x="1215" y="36" fill="#F5F4EF" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">ABOUT</text>
+            
+            <text x="1292" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">CONTACT</text>
+            
+    </g>
+    
+
+    <!-- ABOUT SCREEN (INFINITE SPIRAL ON LEFT + TEXT CONTENT ON RIGHT) -->
+    <g id="About-Layout" transform="translate(150, 110)">
+        
+        <!-- LEFT: INFINITE SPIRAL 3D COLUMN -->
+        <g id="InfiniteSpiral-Column" transform="translate(0, 0)">
+            <!-- Outer Spiral Container Track -->
+            <rect width="380" height="740" rx="20" fill="#ECEBE6" fill-opacity="0.5" stroke="#D9D9D4"/>
+            <text x="190" y="35" text-anchor="middle" fill="#777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">INFINITE SPIRAL CYLINDER</text>
+
+            <!-- Card Stack along Spiral -->
+            <g transform="translate(190, 370)">
+                <!-- Top Card -->
+                <g transform="translate(-60, -220) rotate(-14) scale(0.85)">
+                    <rect width="120" height="120" rx="14" fill="#222" stroke="#FFF" stroke-width="2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11">Desert Light</text>
+                </g>
+                <!-- Upper Card -->
+                <g transform="translate(20, -140) rotate(10) scale(0.95)">
+                    <rect width="120" height="120" rx="14" fill="#2E2E2E" stroke="#FFF" stroke-width="2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11">Green Meadow</text>
+                </g>
+                <!-- Center Zoom Focus Card -->
+                <g transform="translate(-70, -40) scale(1.2)">
+                    <rect width="120" height="120" rx="14" fill="#111" stroke="#2A4365" stroke-width="3" filter="drop-shadow(0 15px 30px rgba(0,0,0,0.25))"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="12" font-weight="700">Mountain Lake</text>
+                </g>
+                <!-- Lower Card -->
+                <g transform="translate(30, 80) rotate(-8) scale(1.0)">
+                    <rect width="120" height="120" rx="14" fill="#252525" stroke="#FFF" stroke-width="2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11">Forest Path</text>
+                </g>
+                <!-- Bottom Card -->
+                <g transform="translate(-50, 190) rotate(12) scale(0.85)">
+                    <rect width="120" height="120" rx="14" fill="#1C1C1C" stroke="#FFF" stroke-width="2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11">Rocky Summit</text>
+                </g>
+            </g>
+            <text x="190" y="715" text-anchor="middle" fill="#999" font-family="Poppins, sans-serif" font-size="10">Auto-Rotating 3D Vertical Cylinder</text>
+        </g>
+
+        <!-- RIGHT: EDITORIAL HEADLINE & PARAGRAPH (FROM USER'S ZIP) -->
+        <g id="Editorial-Content" transform="translate(430, 80)">
+            <text x="0" y="0" fill="#777777" font-family="Poppins, sans-serif" font-size="11.5" font-weight="600" letter-spacing="2">ABOUT THE EXPERIMENT</text>
+            
+            <!-- 3-Line Heading -->
+            <text x="0" y="50" fill="#111111" font-family="Poppins, sans-serif" font-size="34" font-weight="800" line-height="1.2">From Human-Made to AI-Generated:</text>
+            <text x="0" y="92" fill="#111111" font-family="Poppins, sans-serif" font-size="34" font-weight="800">Exploring How Creative Content</text>
+            <text x="0" y="134" fill="#111111" font-family="Poppins, sans-serif" font-size="34" font-weight="800">Influences Audience Perception.</text>
+
+            <!-- Combined Paragraph -->
+            <g transform="translate(0, 180)">
+                <text x="0" y="0" fill="#444" font-family="Poppins, sans-serif" font-size="14.5" line-height="1.7">
+                    <tspan x="0" dy="0">In an era where machine synthesis achieves photorealistic precision,</tspan>
+                    <tspan x="0" dy="28">this experiment was designed to investigate whether human audiences</tspan>
+                    <tspan x="0" dy="28">can intuitively discern physical craftsmanship from generative algorithms</tspan>
+                    <tspan x="0" dy="28">when all creator metadata, prompts, and provenance tags are stripped away.</tspan>
+                    <tspan x="0" dy="38">Through 15 matched subjects spanning beginner wildlife photography,</tspan>
+                    <tspan x="0" dy="28">intermediate fine-art oil glazing, and advanced commercial caustics,</tspan>
+                    <tspan x="0" dy="28">participants uncover the subtle psychological heuristics—from perceived</tspan>
+                    <tspan x="0" dy="28">effort to texture grain—that truly govern aesthetic value.</tspan>
+                </text>
+            </g>
+
+            <!-- Feature Points Grid -->
+            <g transform="translate(0, 430)">
+                <rect x="0" y="0" width="320" height="90" rx="14" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="18" y="28" fill="#2A4365" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">01 / BLIND OBSERVATION</text>
+                <text x="18" y="52" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Zero Metadata Bias</text>
+                <text x="18" y="70" fill="#777" font-family="Poppins, sans-serif" font-size="11">Evaluated purely on visual pixels.</text>
+
+                <rect x="340" y="0" width="320" height="90" rx="14" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="358" y="28" fill="#2A4365" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">02 / 3 CALIBRATED TIERS</text>
+                <text x="358" y="52" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Beginner to Advanced</text>
+                <text x="358" y="70" fill="#777" font-family="Poppins, sans-serif" font-size="11">Progressive perceptual complexity.</text>
+            </g>
+
+            <!-- CTA -->
+            <g transform="translate(0, 560)">
+                <rect width="220" height="48" rx="24" fill="#111"/>
+                <text x="110" y="29" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="12" font-weight="700">START THE TEST →</text>
+            </g>
+        </g>
+    </g>
+
+    
+    <g id="Footer" transform="translate(0, 910)">
+        <line x1="150" y1="0" x2="1290" y2="0" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="35" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">HUMAN OR AI? — Interactive Visual Experiment</text>
+        <text x="1290" y="35" text-anchor="end" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">Interactive Design Prototype</text>
+    </g>
+    
+</svg>

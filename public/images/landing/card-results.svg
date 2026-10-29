@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1E24" />
+      <stop offset="50%" stop-color="#14171C" />
+      <stop offset="100%" stop-color="#0E1014" />
+    </linearGradient>
+    <radialGradient id="cardGlow" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#2A4365" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#14171C" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#cardBg)" />
+  <circle cx="400" cy="370" r="320" fill="url(#cardGlow)" />
+
+  <rect x="24" y="24" width="752" height="752" rx="20" fill="none" stroke="#F5F4EF" stroke-opacity="0.08" stroke-width="1.5" />
+
+  <!-- Central Visual: Perception Matrix & Radar Analytics in Unified Palette -->
+  <g transform="translate(400, 370)">
+    <!-- Radar Chart Concentric Rings -->
+    <polygon points="0,-160 152,-49 94,130 -94,130 -152,-49" fill="none" stroke="#F5F4EF" stroke-opacity="0.1" stroke-width="1.5" stroke-dasharray="3 6" />
+    <polygon points="0,-110 105,-34 65,89 -65,89 -105,-34" fill="none" stroke="#2A4365" stroke-opacity="0.4" stroke-width="1.5" />
+    <polygon points="0,-60 57,-18 35,49 -35,49 -57,-18" fill="none" stroke="#F5F4EF" stroke-opacity="0.15" stroke-width="1" />
+
+    <!-- Analytical Perception Area -->
+    <polygon points="0,-135 120,-25 45,105 -75,90 -115,-15" fill="#2A4365" fill-opacity="0.35" stroke="#F5F4EF" stroke-opacity="0.6" stroke-width="2" />
+    
+    <circle cx="0" cy="-135" r="4.5" fill="#F5F4EF" />
+    <circle cx="120" cy="-25" r="4.5" fill="#F5F4EF" />
+    <circle cx="45" cy="105" r="4.5" fill="#F5F4EF" />
+    <circle cx="-75" cy="90" r="4.5" fill="#F5F4EF" />
+    <circle cx="-115" cy="-15" r="4.5" fill="#F5F4EF" />
+
+    <!-- Center Evaluation Badge -->
+    <rect x="-70" y="-30" width="140" height="60" rx="30" fill="#101216" stroke="#F5F4EF" stroke-opacity="0.3" stroke-width="1.5" />
+    <text x="0" y="8" fill="#F5F4EF" font-family="'Poppins', sans-serif" font-size="22" font-weight="600" text-anchor="middle" letter-spacing="1">SCORE</text>
+  </g>
+
+  <!-- Card Typography Overlay -->
+  <g text-anchor="middle" font-family="'Poppins', sans-serif">
+    <rect x="250" y="60" width="300" height="32" rx="16" fill="#F5F4EF" fill-opacity="0.06" stroke="#F5F4EF" stroke-opacity="0.15" />
+    <text x="400" y="81" fill="#D9D9D4" font-size="11" font-weight="500" letter-spacing="3.5">PERCEPTION MATRIX</text>
+    
+    <text x="400" y="690" fill="#F5F4EF" font-size="28" font-weight="600" letter-spacing="2">RESULTS &amp; STATS</text>
+    <text x="400" y="722" fill="#9EA8B6" font-size="13" font-weight="400" letter-spacing="2.5">ACCURACY • BIAS • CUE ANALYSIS</text>
+  </g>
+</svg>

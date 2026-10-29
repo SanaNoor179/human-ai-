@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1200" width="1440" height="1200" fill="none">
+    <rect width="1440" height="1200" fill="#F5F4EF"/>
+    
+    <g id="Header">
+        <rect width="1440" height="64" fill="#F5F4EF"/>
+        <line x1="0" y1="64" x2="1440" y2="64" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="38" fill="#111111" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">HUMAN <tspan font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="400" fill="#777777">OR</tspan> AI?</text>
+        
+            <text x="960" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">HOME</text>
+            
+            <rect x="1012" y="18" width="96" height="28" rx="14" fill="#111111"/>
+            <text x="1024" y="36" fill="#F5F4EF" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">THE TEST</text>
+            
+            <text x="1128" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">LIBRARY</text>
+            
+            <text x="1219" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">ABOUT</text>
+            
+            <text x="1292" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">CONTACT</text>
+            
+    </g>
+    
+
+    <g id="Quiz-Container" transform="translate(300, 95)">
+        <!-- Progress -->
+        <text x="0" y="22" fill="#2A4365" font-family="Poppins, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">ROUND 1 OF 15</text>
+        <rect x="740" y="6" width="100" height="24" rx="12" fill="#ECEBE6"/>
+        <text x="790" y="22" text-anchor="middle" fill="#333" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">BEGINNER</text>
+        <line x1="0" y1="42" x2="840" y2="42" stroke="#D9D9D4"/>
+
+        <!-- Title -->
+        <text x="420" y="85" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="24" font-weight="700">WILDLIFE PHOTOGRAPHY — FOX</text>
+
+        <!-- Main Image -->
+        <g id="Subject-Image" transform="translate(30, 110)">
+            <rect width="780" height="440" rx="20" fill="#1C1C1C" stroke="#D9D9D4"/>
+            <text x="390" y="230" text-anchor="middle" fill="#888" font-family="Poppins, sans-serif" font-size="15">[ High-Resolution Subject Photography: Fox ]</text>
+            <rect x="650" y="390" width="115" height="34" rx="17" fill="rgba(17,17,17,0.8)" stroke="rgba(255,255,255,0.2)"/>
+            <text x="707" y="412" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11" font-weight="600">🔍 Inspect</text>
+        </g>
+
+        <!-- Outcome Banner -->
+        <g id="Outcome-Banner" transform="translate(30, 575)">
+            <rect width="780" height="52" rx="14" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.35"/>
+            <text x="24" y="32" fill="#065F46" font-family="Poppins, sans-serif" font-size="14" font-weight="800">CORRECT DECISION!</text>
+            <rect x="640" y="14" width="116" height="25" rx="12.5" fill="#10B981"/>
+            <text x="698" y="30" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">HUMAN MADE</text>
+        </g>
+
+        <!-- Explanation Card -->
+        <g id="Explanation" transform="translate(30, 645)">
+            <rect width="780" height="120" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="24" y="32" fill="#222" font-family="Poppins, sans-serif" font-size="13">Natural optical depth of field cleanly separates the fox from the dark woodland understory.</text>
+            <text x="24" y="54" fill="#222" font-family="Poppins, sans-serif" font-size="13">Fine fur whiskers, grounded soil texture, and authentic optical vignetting show genuine lens physics.</text>
+            <line x1="24" y1="74" x2="756" y2="74" stroke="#F0EFEA"/>
+            <text x="24" y="98" fill="#777" font-family="Poppins, sans-serif" font-size="12"><tspan font-weight="600" fill="#333">Production Context:</tspan> Photographed on high-speed telephoto lens in natural British woodland.</text>
+        </g>
+
+        <!-- Factors Checklist -->
+        <g id="Factors" transform="translate(30, 785)">
+            <rect width="780" height="96" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="24" y="28" fill="#777" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">WHAT INFLUENCED YOUR DECISION?</text>
+            <g transform="translate(24, 42)">
+                <rect x="0" width="120" height="32" rx="16" fill="#111"/>
+                <text x="60" y="20" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Visual Quality</text>
+                <rect x="130" width="100" height="32" rx="16" fill="#111"/>
+                <text x="180" y="20" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Authenticity</text>
+                <rect x="240" width="90" height="32" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="285" y="20" text-anchor="middle" fill="#555" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Originality</text>
+                <rect x="340" width="70" height="32" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="375" y="20" text-anchor="middle" fill="#555" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Effort</text>
+                <rect x="420" width="70" height="32" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="455" y="20" text-anchor="middle" fill="#555" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Style</text>
+                <rect x="500" width="95" height="32" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="547" y="20" text-anchor="middle" fill="#555" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Familiarity</text>
+            </g>
+        </g>
+
+        <!-- Next Button -->
+        <rect x="30" y="900" width="780" height="52" rx="14" fill="#111"/>
+        <text x="420" y="932" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="13" font-weight="700">NEXT SUBJECT →</text>
+    </g>
+
+    
+    <g id="Footer" transform="translate(0, 1120)">
+        <line x1="150" y1="0" x2="1290" y2="0" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="35" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">HUMAN OR AI? — Interactive Visual Experiment</text>
+        <text x="1290" y="35" text-anchor="end" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">Interactive Design Prototype</text>
+    </g>
+    
+</svg>

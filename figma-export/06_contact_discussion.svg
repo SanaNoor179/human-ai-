@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1080" width="1440" height="1080" fill="none">
+    <rect width="1440" height="1080" fill="#F5F4EF"/>
+    
+    <!-- NAVIGATION HEADER -->
+    <g id="Header" transform="translate(0, 0)">
+        <rect width="1440" height="64" fill="#F5F4EF" fill-opacity="0.95"/>
+        <line x1="0" y1="64" x2="1440" y2="64" stroke="#D9D9D4" stroke-width="1"/>
+        <g transform="translate(150, 0)">
+            <!-- Brand Logo -->
+            <text x="0" y="38" fill="#111111" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">HUMAN <tspan font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="400" fill="#777777">OR</tspan> AI?</text>
+        </g>
+        
+            <text x="960" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">HOME</text>
+            
+            <text x="1024" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">THE TEST</text>
+            
+            <text x="1124" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">LIBRARY</text>
+            
+            <text x="1215" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">ABOUT</text>
+            
+            <rect x="1276" y="18" width="87" height="28" rx="14" fill="#111111"/>
+            <text x="1288" y="36" fill="#F5F4EF" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">CONTACT</text>
+            
+    </g>
+    
+
+    <!-- CONTACT CONTENT -->
+    <g id="Contact-Content" transform="translate(260, 95)">
+        <!-- Header -->
+        <text x="0" y="20" fill="#2A4365" font-family="Poppins, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">RESEARCH INQUIRY &amp; FEEDBACK</text>
+        <text x="0" y="55" fill="#111111" font-family="Poppins, sans-serif" font-size="34" font-weight="800">CONNECT &amp; DISCUSS</text>
+        <text x="0" y="85" fill="#777777" font-family="Poppins, sans-serif" font-size="13.5">Submit feedback, propose artworks for future research tiers, or connect with the team.</text>
+        <line x1="0" y1="105" x2="920" y2="105" stroke="#D9D9D4" stroke-width="1"/>
+
+        <!-- Grid Layout -->
+        <g transform="translate(0, 130)">
+            <!-- Left Form Card -->
+            <g id="Contact-Form-Card">
+                <rect width="540" height="560" rx="20" fill="#FFFFFF" stroke="#D9D9D4" stroke-width="1" filter="drop-shadow(0 4px 18px rgba(0,0,0,0.04))"/>
+                
+                <!-- Field: Name -->
+                <text x="28" y="42" fill="#111" font-family="Poppins, sans-serif" font-size="11" font-weight="700" letter-spacing="1">YOUR NAME</text>
+                <rect x="28" y="52" width="484" height="44" rx="10" fill="#FAF9F6" stroke="#D9D9D4"/>
+                <text x="44" y="79" fill="#999" font-family="Poppins, sans-serif" font-size="13">Sarah Chen</text>
+
+                <!-- Field: Email -->
+                <text x="28" y="126" fill="#111" font-family="Poppins, sans-serif" font-size="11" font-weight="700" letter-spacing="1">EMAIL ADDRESS</text>
+                <rect x="28" y="136" width="484" height="44" rx="10" fill="#FAF9F6" stroke="#D9D9D4"/>
+                <text x="44" y="163" fill="#999" font-family="Poppins, sans-serif" font-size="13">sarah@example.com</text>
+
+                <!-- Field: Subject -->
+                <text x="28" y="210" fill="#111" font-family="Poppins, sans-serif" font-size="11" font-weight="700" letter-spacing="1">INQUIRY SUBJECT</text>
+                <rect x="28" y="220" width="484" height="44" rx="10" fill="#FAF9F6" stroke="#D9D9D4"/>
+                <text x="44" y="247" fill="#111" font-family="Poppins, sans-serif" font-size="13">General Feedback &amp; Perceptual Notes</text>
+                <text x="490" y="247" fill="#666" font-family="Poppins, sans-serif" font-size="12">▼</text>
+
+                <!-- Field: Message -->
+                <text x="28" y="294" fill="#111" font-family="Poppins, sans-serif" font-size="11" font-weight="700" letter-spacing="1">MESSAGE OR FEEDBACK</text>
+                <rect x="28" y="304" width="484" height="140" rx="10" fill="#FAF9F6" stroke="#D9D9D4"/>
+                <text x="44" y="335" fill="#999" font-family="Poppins, sans-serif" font-size="13">Share your thoughts on the experiment or suggested visual cues...</text>
+
+                <!-- Submit Button -->
+                <rect x="28" y="475" width="484" height="48" rx="12" fill="#111111"/>
+                <text x="270" y="505" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="12.5" font-weight="700" letter-spacing="1">SEND MESSAGE →</text>
+            </g>
+
+            <!-- Right Sidebar Info -->
+            <g id="Sidebar-Cards" transform="translate(570, 0)">
+                <!-- Sidebar 1 -->
+                <g id="Sidebar-1">
+                    <rect width="350" height="220" rx="18" fill="#FFFFFF" stroke="#D9D9D4" stroke-width="1"/>
+                    <text x="24" y="38" fill="#111" font-family="Poppins, sans-serif" font-size="15" font-weight="700">Participate in Future Rounds</text>
+                    <text x="24" y="70" fill="#444" font-family="Poppins, sans-serif" font-size="12.5">We are actively curating 15 additional</text>
+                    <text x="24" y="92" fill="#444" font-family="Poppins, sans-serif" font-size="12.5">subjects for Tier 4 (Hyper-Photorealism).</text>
+                    <text x="24" y="114" fill="#444" font-family="Poppins, sans-serif" font-size="12.5">If you are a photographer or prompt engineer</text>
+                    <text x="24" y="136" fill="#444" font-family="Poppins, sans-serif" font-size="12.5">wishing to submit candidate works with known</text>
+                    <text x="24" y="158" fill="#444" font-family="Poppins, sans-serif" font-size="12.5">provenance, include your raw files link.</text>
+                </g>
+
+                <!-- Sidebar 2 -->
+                <g id="Sidebar-2" transform="translate(0, 250)">
+                    <rect width="350" height="220" rx="18" fill="#FFFFFF" stroke="#D9D9D4" stroke-width="1"/>
+                    <text x="24" y="38" fill="#111" font-family="Poppins, sans-serif" font-size="15" font-weight="700">Privacy &amp; Data Ethics</text>
+                    <text x="24" y="70" fill="#444" font-family="Poppins, sans-serif" font-size="12.5">Responses collected in this experiment are</text>
+                    <text x="24" y="92" fill="#444" font-family="Poppins, sans-serif" font-size="12.5">aggregated anonymously for perceptual</text>
+                    <text x="24" y="114" fill="#444" font-family="Poppins, sans-serif" font-size="12.5">research into human-AI discernment</text>
+                    <text x="24" y="136" fill="#444" font-family="Poppins, sans-serif" font-size="12.5">benchmarks. No personally identifiable</text>
+                    <text x="24" y="158" fill="#444" font-family="Poppins, sans-serif" font-size="12.5">tracking is conducted.</text>
+                </g>
+            </g>
+        </g>
+    </g>
+
+    <!-- FOOTER -->
+    <g transform="translate(0, 960)">
+        <line x1="150" y1="0" x2="1290" y2="0" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="720" y="35" text-anchor="middle" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="400">HUMAN OR AI? — A Visual Perception &amp; Authorship Experiment</text>
+    </g>
+</svg>

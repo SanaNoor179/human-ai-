@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Circular Image Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body class="w-screen h-screen relative bg-white">
+
+  <!-- Header -->
+  <header class="absolute top-0 inset-x-0 h-16 flex items-center justify-between px-6 z-20 pointer-events-none">
+    <div class="font-bold tracking-wider text-sm uppercase text-[#111111]">
+      HUMAN <span class="italic text-[#777777] font-normal">OR</span> AI?
+    </div>
+  </header>
+
+  <!-- WebGL Canvas Container -->
+  <div id="gallery-container" class="w-full h-full relative cursor-grab active:cursor-grabbing"></div>
+
+  <!-- Close View Button (shown when zoomed) -->
+  <div id="close-btn-container" class="absolute top-5 right-6 z-30 hidden">
+    <button id="close-btn" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#111111]/85 hover:bg-[#111111] text-white/90 hover:text-white border border-white/20 shadow-lg backdrop-blur-md text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer active:scale-95">
+      <span class="text-base leading-none">✕</span>
+      <span>Close View</span>
+    </button>
+  </div>
+
+  <!-- Bottom UI Controls -->
+  <div class="absolute bottom-5 inset-x-0 text-center select-none z-10 px-4 pointer-events-none">
+    <div class="max-w-xl mx-auto flex flex-col items-center gap-1.5 pointer-events-auto">
+      <p id="item-category" class="text-xs sm:text-sm font-medium text-[#777777] tracking-wider uppercase">
+        ARCHIVE SAMPLE
+      </p>
+
+      <button id="flip-btn" class="group inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-black/15 bg-white/95 hover:bg-white hover:border-black/35 shadow-sm backdrop-blur-md transition-all duration-200 cursor-pointer active:scale-95">
+        <span id="flip-dot" class="w-2.5 h-2.5 rounded-full bg-neutral-600 transition-colors duration-200"></span>
+        <span id="flip-text" class="text-xs font-bold tracking-wider uppercase text-[#111111]">
+          Click Card to Zoom In & Inspect
+        </span>
+      </button>
+
+      <p id="helper-hint" class="text-[10px] text-[#888888] tracking-widest uppercase mt-0.5">
+        Click any card to zoom in • Drag to rotate archive
+      </p>
+    </div>
+  </div>
+
+  <!-- Gallery Logic with OGL via esm.sh -->
+  <script type="module">
+    import { Renderer, Camera, Transform, Plane, Program, Mesh, Texture } from 'https://esm.sh/ogl';
+
+    const ITEMS = [
+      { text: "WILDLIFE PHOTOGRAPHY — FOX", image: "https://images.unsplash.com/photo-1516934024742-b461fba47600?auto=format&fit=crop&w=900&q=80", actualOrigin: "HUMAN" },
+      { text: "WILDLIFE PHOTOGRAPHY — PANDA", image: "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=900&q=80", actualOrigin: "AI" },
+      { text: "PORTRAIT — AI STUDIO", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80", actualOrigin: "AI" },
+      { text: "PORTRAIT — PHOTOGRAPH", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80", actualOrigin: "HUMAN" },
+      { text: "FINE ART — AI STILL LIFE", image: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=80", actualOrigin: "AI" },
+      { text: "FINE ART — OIL PAINTING", image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=900&q=80", actualOrigin: "HUMAN" },
+      { text: "LANDSCAPE — FLORIDA LAKE", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80", actualOrigin: "HUMAN" },
+      { text: "LANDSCAPE — AI MOUNTAIN LAKE", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80", actualOrigin: "AI" },
+      { text: "WILDLIFE — LIONS", image: "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?auto=format&fit=crop&w=900&q=80", actualOrigin: "HUMAN" },
+      { text: "WILDLIFE — OWL", image: "https://images.unsplash.com/photo-1579380656108-328e4237d438?auto=format&fit=crop&w=900&q=80", actualOrigin: "AI" },
+      { text: "MACRO — INSECT", image: "https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=900&q=80", actualOrigin: "HUMAN" },
+      { text: "ARCHITECTURE — AI PAVILION", image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80", actualOrigin: "AI" },
+      { text: "STREET — CANDID PASSERSBY", image: "https://images.unsplash.com/photo-1477959858617-67f30bc75b82?auto=format&fit=crop&w=900&q=80", actualOrigin: "HUMAN" },
+      { text: "AUTOMOTIVE — VINTAGE CAR", image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80", actualOrigin: "AI" },
+      { text: "ASTRONOMY — NEBULA", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80", actualOrigin: "HUMAN" }
+    ];
+
+    const VERTEX_SHADER = /* glsl */ `
+      precision highp float;
+      attribute vec3 position;
+      attribute vec2 uv;
+      uniform mat4 modelViewMatrix;
+      uniform mat4 projectionMatrix;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `;
+
+    const FRONT_FRAGMENT_SHADER = /* glsl */ `
+      precision highp float;
+      uniform sampler2D uMap;
+      uniform float uBorderRadius;
+      uniform vec2 uCardResolution;
+      uniform vec2 uImageResolution;
+      uniform float uAlpha;
+      varying vec2 vUv;
+
+      float roundedBoxSDF(vec2 p, vec2 b, float r) {
+        vec2 d = abs(p) - b + vec2(r);
+        return min(max(d.x, d.y), 0.0) + length(max(d, 0.0)) - r;
+      }
+
+      void main() {
+        if (!gl_FrontFacing) discard;
+        vec2 uv = vUv;
+        if (uImageResolution.x > 0.0 && uImageResolution.y > 0.0 && uCardResolution.x > 0.0 && uCardResolution.y > 0.0) {
+          float cardAspect = uCardResolution.x / uCardResolution.y;
+          float imgAspect = uImageResolution.x / uImageResolution.y;
+          if (cardAspect > imgAspect) {
+            float scale = imgAspect / cardAspect;
+            uv.y = (uv.y - 0.5) * scale + 0.5;
+          } else {
+            float scale = cardAspect / imgAspect;
+            uv.x = (uv.x - 0.5) * scale + 0.5;
+          }
+        }
+        vec4 color = texture2D(uMap, uv);
+        if (uBorderRadius > 0.0) {
+          vec2 p = vUv - vec2(0.5);
+          vec2 b = vec2(0.5);
+          float d = roundedBoxSDF(p, b, uBorderRadius);
+          if (d > 0.0) discard;
+          float alpha = 1.0 - smoothstep(-0.008, 0.002, d);
+          color.a *= alpha;
+        }
+        color.a *= uAlpha;
+        gl_FragColor = color;
+      }
+    `;
+
+    const BACK_FRAGMENT_SHADER = /* glsl */ `
+      precision highp float;
+      uniform sampler2D uMap;
+      uniform float uBorderRadius;
+      uniform float uAlpha;
+      varying vec2 vUv;
+
+      float roundedBoxSDF(vec2 p, vec2 b, float r) {
+        vec2 d = abs(p) - b + vec2(r);
+        return min(max(d.x, d.y), 0.0) + length(max(d, 0.0)) - r;
+      }
+
+      void main() {
+        if (!gl_FrontFacing) discard;
+        vec4 color = texture2D(uMap, vUv);
+        if (uBorderRadius > 0.0) {
+          vec2 p = vUv - vec2(0.5);
+          vec2 b = vec2(0.5);
+          float d = roundedBoxSDF(p, b, uBorderRadius);
+          if (d > 0.0) discard;
+          float alpha = 1.0 - smoothstep(-0.008, 0.002, d);
+          color.a *= alpha;
+        }
+        color.a *= uAlpha;
+        gl_FragColor = color;
+      }
+    `;
+
+    function extractTitleAndType(item) {
+      const isAI = item.actualOrigin === 'AI';
+      const origin = isAI ? 'AI Generated' : 'Human Made';
+      let title = 'Wooded Landscape';
+      let imageType = 'Photography';
+
+      if (item.text.includes('—')) {
+        const parts = item.text.split('—').map(s => s.trim());
+        imageType = parts[0].toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        title = parts[1].toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      }
+
+      const up = title.toUpperCase();
+      if (up.includes('PANDA')) title = 'Giant Panda';
+      else if (up.includes('FOX')) title = 'Red Fox';
+      else if (up.includes('LION')) title = 'Savanna Lions';
+      else if (up.includes('OWL')) title = 'Barn Owl';
+      else if (up.includes('PORTRAIT')) title = 'Studio Portrait';
+
+      return { title, imageType, origin, isAI };
+    }
+
+    function createCardBackCanvas(item, imgElement) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 960;
+      canvas.height = 1280;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      const r = 52;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(r, 0); ctx.lineTo(w - r, 0); ctx.quadraticCurveTo(w, 0, w, r);
+      ctx.lineTo(w, h - r); ctx.quadraticCurveTo(w, h, w - r, h);
+      ctx.lineTo(r, h); ctx.quadraticCurveTo(0, h, 0, h - r);
+      ctx.lineTo(0, r); ctx.quadraticCurveTo(0, 0, r, 0);
+      ctx.closePath();
+      ctx.clip();
+
+      const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
+      bgGrad.addColorStop(0, '#222225');
+      bgGrad.addColorStop(0.5, '#27272a');
+      bgGrad.addColorStop(1, '#2c2c31');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      if (imgElement && imgElement.naturalWidth) {
+        ctx.save();
+        ctx.globalAlpha = 0.08;
+        ctx.drawImage(imgElement, 0, 0, w, h);
+        ctx.restore();
+      }
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      const { title, imageType, origin, isAI } = extractTitleAndType(item);
+
+      // Top Title in Poppins
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 64px "Poppins", sans-serif';
+      ctx.fillText(title, 76, 88);
+
+      // Bottom Row
+      const bottomY = h - 115;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = '#a1a1aa';
+      ctx.font = '500 42px "Poppins", sans-serif';
+      ctx.fillText(imageType, 76, bottomY);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = isAI ? '#60a5fa' : '#34d399';
+      ctx.font = '600 42px "Poppins", sans-serif';
+      ctx.fillText(origin, w - 76, bottomY);
+
+      ctx.restore();
+      return canvas;
+    }
+
+    const container = document.getElementById('gallery-container');
+    const closeBtnContainer = document.getElementById('close-btn-container');
+    const closeBtn = document.getElementById('close-btn');
+    const itemCategory = document.getElementById('item-category');
+    const flipBtn = document.getElementById('flip-btn');
+    const flipDot = document.getElementById('flip-dot');
+    const flipText = document.getElementById('flip-text');
+    const helperHint = document.getElementById('helper-hint');
+
+    const renderer = new Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio || 1, 2) });
+    const gl = renderer.gl;
+    gl.clearColor(0, 0, 0, 0);
+    container.appendChild(gl.canvas);
+
+    const camera = new Camera(gl, { fov: 45 });
+    camera.position.z = 24.0;
+    const scene = new Transform();
+
+    const cardWidth = 4.85;
+    const cardHeight = 6.45;
+    const cardGeometry = new Plane(gl, { width: cardWidth, height: cardHeight });
+    const radius = 20.5;
+    const totalItems = ITEMS.length;
+    const angleStep = (2 * Math.PI) / totalItems;
+
+    const medias = [];
+
+    ITEMS.forEach((item, index) => {
+      const group = new Transform();
+      group.setParent(scene);
+      const flipGroup = new Transform();
+      flipGroup.setParent(group);
+
+      const frontTexture = new Texture(gl, { generateMipmaps: false });
+      const frontProgram = new Program(gl, {
+        vertex: VERTEX_SHADER,
+        fragment: FRONT_FRAGMENT_SHADER,
+        uniforms: {
+          uMap: { value: frontTexture },
+          uBorderRadius: { value: 0.05 },
+          uCardResolution: { value: [cardWidth, cardHeight] },
+          uImageResolution: { value: [1, 1] },
+          uAlpha: { value: 1.0 }
+        },
+        cullFace: false,
+        transparent: true,
+        depthTest: true
+      });
+
+      const frontMesh = new Mesh(gl, { geometry: cardGeometry, program: frontProgram });
+      frontMesh.position.z = 0.015;
+      frontMesh.setParent(flipGroup);
+
+      const initialBackCanvas = createCardBackCanvas(item);
+      const backTexture = new Texture(gl, { image: initialBackCanvas, generateMipmaps: false });
+      const backProgram = new Program(gl, {
+        vertex: VERTEX_SHADER,
+        fragment: BACK_FRAGMENT_SHADER,
+        uniforms: {
+          uMap: { value: backTexture },
+          uBorderRadius: { value: 0.05 },
+          uAlpha: { value: 1.0 }
+        },
+        cullFace: false,
+        transparent: true,
+        depthTest: true
+      });
+
+      const backMesh = new Mesh(gl, { geometry: cardGeometry, program: backProgram });
+      backMesh.position.z = -0.015;
+      backMesh.rotation.y = Math.PI;
+      backMesh.setParent(flipGroup);
+
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = item.image;
+      img.onload = () => {
+        frontTexture.image = img;
+        frontProgram.uniforms.uImageResolution.value = [img.naturalWidth || 1, img.naturalHeight || 1];
+        backTexture.image = createCardBackCanvas(item, img);
+      };
+
+      medias.push({
+        group, flipGroup, frontMesh, backMesh, frontProgram, backProgram, frontTexture, backTexture, img,
+        index, item, currentFlip: 0, targetFlip: 0, currentZoom: 0, targetZoom: 0
+      });
+    });
+
+    document.fonts.ready.then(() => {
+      medias.forEach(m => { m.backTexture.image = createCardBackCanvas(m.item, m.img); });
+    });
+
+    let targetScroll = 0;
+    let currentScroll = 0;
+    let isDown = false;
+    let startX = 0, startY = 0, lastX = 0, lastY = 0;
+    let dragDistance = 0, velocity = 0;
+    let pointerX = 0, pointerY = 0;
+    let isPointerOver = false;
+    let zoomedCardIdx = null;
+    let isFlipped = false;
+
+    function closeZoom() {
+      if (zoomedCardIdx !== null) {
+        const m = medias[zoomedCardIdx];
+        if (m) { m.targetZoom = 0; m.targetFlip = 0; }
+        zoomedCardIdx = null;
+        isFlipped = false;
+        closeBtnContainer.classList.add('hidden');
+        itemCategory.classList.remove('hidden');
+        flipDot.className = 'w-2.5 h-2.5 rounded-full bg-neutral-600 transition-colors duration-200';
+        flipText.textContent = 'Click Card to Zoom In & Inspect';
+        helperHint.textContent = 'Click any card to zoom in • Drag to rotate archive';
+      }
+    }
+
+    function toggleFlip() {
+      if (zoomedCardIdx !== null) {
+        const m = medias[zoomedCardIdx];
+        if (m) {
+          isFlipped = !isFlipped;
+          m.targetFlip = isFlipped ? Math.PI : 0;
+          const origin = m.item.actualOrigin === 'AI' ? 'AI GENERATED' : 'HUMAN MADE';
+          flipDot.className = `w-2.5 h-2.5 rounded-full transition-colors duration-200 ${isFlipped ? (m.item.actualOrigin === 'AI' ? 'bg-[#3b82f6]' : 'bg-[#10b981]') : 'bg-neutral-600'}`;
+          flipText.textContent = isFlipped ? `Flipped: ${origin} (Click to Flip Back ↺)` : 'Click Card to Flip ↺';
+          helperHint.textContent = 'Click card to flip 3D • Click outside or ✕ to return';
+        }
+      }
+    }
+
+    closeBtn.addEventListener('click', closeZoom);
+    flipBtn.addEventListener('click', toggleFlip);
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeZoom(); });
+
+    function handleResize() {
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      renderer.setSize(width, height);
+      const aspect = width / height;
+      camera.perspective({ aspect });
+      camera.position.z = aspect < 1.2 ? 24.0 * (1.15 / Math.max(0.65, aspect)) : 24.0;
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    container.addEventListener('pointerdown', (e) => {
+      isDown = true;
+      startX = lastX = e.clientX;
+      startY = lastY = e.clientY;
+      dragDistance = 0;
+      velocity = 0;
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      const rect = container.getBoundingClientRect();
+      pointerX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      pointerY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+      isPointerOver = true;
+      if (!isDown) return;
+      const deltaX = e.clientX - lastX;
+      const deltaY = e.clientY - lastY;
+      lastX = e.clientX; lastY = e.clientY;
+      dragDistance += Math.hypot(deltaX, deltaY);
+      if (zoomedCardIdx === null) {
+        velocity = deltaX * 0.0022;
+        targetScroll += velocity;
+      }
+    });
+
+    window.addEventListener('pointerup', (e) => {
+      if (!isDown) return;
+      isDown = false;
+      if (zoomedCardIdx === null && Math.abs(velocity) > 0.0008) {
+        targetScroll += velocity * 3.5;
+      }
+      if (dragDistance < 10) {
+        const rect = container.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+        const aspect = rect.width / rect.height;
+        const tanHalfFov = Math.tan((camera.fov * Math.PI) / 360);
+
+        if (zoomedCardIdx !== null) {
+          const m = medias[zoomedCardIdx];
+          const relZ = camera.position.z - m.group.position.z;
+          const projX = (m.group.position.x / (relZ * tanHalfFov * aspect)) * (rect.width / 2) + rect.width / 2;
+          const projY = (-(m.group.position.y - camera.position.y) / (relZ * tanHalfFov)) * (rect.height / 2) + rect.height / 2;
+          const cardPixelW = (cardWidth / (relZ * tanHalfFov * aspect)) * (rect.width / 2);
+          const cardPixelH = (cardHeight / (relZ * tanHalfFov)) * (rect.height / 2);
+          if (Math.abs(clickX - projX) < cardPixelW * 0.52 && Math.abs(clickY - projY) < cardPixelH * 0.52) {
+            toggleFlip();
+          } else {
+            closeZoom();
+          }
+        } else {
+          let clickedMedia = null, minDist = Infinity;
+          medias.forEach(m => {
+            if (!m.frontMesh.visible) return;
+            const relZ = camera.position.z - m.group.position.z;
+            const projX = (m.group.position.x / (relZ * tanHalfFov * aspect)) * (rect.width / 2) + rect.width / 2;
+            const projY = (-(m.group.position.y - camera.position.y) / (relZ * tanHalfFov)) * (rect.height / 2) + rect.height / 2;
+            const cardPixelW = (cardWidth / (relZ * tanHalfFov * aspect)) * (rect.width / 2);
+            const cardPixelH = (cardHeight / (relZ * tanHalfFov)) * (rect.height / 2);
+            const dx = Math.abs(clickX - projX), dy = Math.abs(clickY - projY);
+            if (dx < cardPixelW * 0.52 && dy < cardPixelH * 0.52) {
+              const d = Math.hypot(dx, dy);
+              if (d < minDist) { minDist = d; clickedMedia = m; }
+            }
+          });
+          if (clickedMedia) {
+            zoomedCardIdx = clickedMedia.index;
+            clickedMedia.targetZoom = 1.0;
+            clickedMedia.targetFlip = 0;
+            isFlipped = false;
+            closeBtnContainer.classList.remove('hidden');
+            itemCategory.classList.add('hidden');
+            flipDot.className = 'w-2.5 h-2.5 rounded-full bg-neutral-600 transition-colors duration-200';
+            flipText.textContent = 'Click Card to Flip ↺';
+            helperHint.textContent = 'Click card to flip 3D • Click outside or ✕ to return';
+          }
+        }
+      }
+    });
+
+    container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (zoomedCardIdx !== null) return;
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      targetScroll -= delta * 0.0010;
+    }, { passive: false });
+
+    function update() {
+      requestAnimationFrame(update);
+      currentScroll += (targetScroll - currentScroll) * 0.05;
+      const summitY = 1.20;
+      const archFactor = 0.65;
+      const nearZ = camera.position.z - 11.4;
+
+      medias.forEach((media, i) => {
+        media.currentZoom += (media.targetZoom - media.currentZoom) * 0.12;
+        media.currentFlip += (media.targetFlip - media.currentFlip) * 0.12;
+
+        let normAngle = (i * angleStep + currentScroll) % (2 * Math.PI);
+        if (normAngle > Math.PI) normAngle -= 2 * Math.PI;
+        if (normAngle < -Math.PI) normAngle += 2 * Math.PI;
+
+        const distFromCenter = Math.abs(normAngle);
+        const arcX = Math.sin(normAngle) * radius;
+        const arcY = (Math.cos(normAngle) - 1.0) * radius * archFactor + summitY;
+        const arcZ = -distFromCenter * 0.28;
+        const arcRotZ = -normAngle * 0.76;
+
+        const zoomX = 0, zoomY = 0.60, zoomZ = nearZ, zoomRotZ = 0;
+        const zProg = media.currentZoom;
+
+        media.group.position.x = arcX * (1 - zProg) + zoomX * zProg;
+        media.group.position.y = arcY * (1 - zProg) + zoomY * zProg;
+        media.group.position.z = arcZ * (1 - zProg) + zoomZ * zProg;
+        media.group.rotation.z = arcRotZ * (1 - zProg) + zoomRotZ * zProg;
+
+        let tiltX = 0, tiltY = 0;
+        if (media.currentZoom > 0.4) {
+          tiltX = -pointerY * 0.14 * media.currentZoom;
+          tiltY = pointerX * 0.14 * media.currentZoom;
+        } else if (distFromCenter < 0.25 && isPointerOver && zoomedCardIdx === null) {
+          tiltX = -pointerY * 0.08;
+          tiltY = pointerX * 0.08;
+        }
+
+        media.flipGroup.rotation.y = media.currentFlip + tiltY;
+        media.flipGroup.rotation.x = tiltX;
+
+        if (zoomedCardIdx === i) {
+          media.frontMesh.visible = true;
+          media.backMesh.visible = true;
+          media.frontProgram.uniforms.uAlpha.value = 1.0;
+          media.backProgram.uniforms.uAlpha.value = 1.0;
+        } else {
+          if (distFromCenter > 1.30) {
+            media.frontMesh.visible = false;
+            media.backMesh.visible = false;
+          } else {
+            media.frontMesh.visible = true;
+            media.backMesh.visible = true;
+            const edgeFade = 1.0 - Math.min(1.0, Math.max(0.0, (distFromCenter - 0.98) / 0.32));
+            const alphaVal = Math.max(0.0, Math.min(1.0, edgeFade * 0.95 + 0.05));
+            media.frontProgram.uniforms.uAlpha.value = alphaVal;
+            media.backProgram.uniforms.uAlpha.value = alphaVal;
+          }
+        }
+      });
+
+      const normS = ((-currentScroll % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+      const currIdx = Math.round(normS / angleStep) % totalItems;
+      const safeIdx = (currIdx + totalItems) % totalItems;
+      if (zoomedCardIdx === null && medias[safeIdx]) {
+        itemCategory.textContent = medias[safeIdx].item.text;
+      }
+
+      renderer.render({ scene, camera });
+    }
+
+    update();
+  </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "name": "ScrollReveal About",
+  "description": "A scroll-triggered tab that slides up to reveal project details on your website’s about page.",
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

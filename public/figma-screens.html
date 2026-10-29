@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HUMAN OR AI? — Editable Figma Frames</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #ECEBE5;
+      color: #111111;
+    }
+    .artboard-container {
+      width: 100%;
+      max-width: 1440px;
+      margin-bottom: 60px;
+    }
+    .svg-canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06);
+      background: #F5F4EF;
+      overflow: hidden;
+    }
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #111111;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(16px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="py-10 px-6 flex flex-col items-center">
+
+  <div id="toast">
+    <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+    <span id="toast-text">Copied to clipboard! Switch to Figma and press Ctrl+V / ⌘V.</span>
+  </div>
+
+  <!-- Header Banner -->
+  <header class="sticky top-4 z-50 bg-white/95 backdrop-blur-md border border-[#D9D9D4] rounded-2xl p-5 shadow-lg mb-10 max-w-[1440px] w-full flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="bg-[#111111] text-white text-xs font-bold px-2 py-0.5 rounded tracking-wide">FIGMA READY</span>
+        <h1 class="text-base font-bold text-[#111111] uppercase tracking-wide">HUMAN OR AI? — Direct Vector Frames</h1>
+      </div>
+      <p class="text-xs text-[#666666] mt-1">
+        <strong>No plugins needed:</strong> Click <em>"Copy for Figma"</em> below any screen, then in Figma press <strong>Ctrl+V</strong> (or <strong>⌘V</strong> on Mac). Figma automatically turns it into native vector shapes, auto-layout frames, and editable text layers!
+      </p>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="/figma-export.zip" download="figma-export.zip" class="bg-[#2A4365] hover:bg-[#1E3250] text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+        Download All (.zip)
+      </a>
+      <a href="/" class="bg-white border border-[#D9D9D4] hover:bg-gray-50 text-[#111] text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+        ← Back to Live Preview
+      </a>
+    </div>
+  </header>
+
+  <!-- Screens Container -->
+  <div class="w-full flex flex-col items-center">
+
+    <div class="artboard-container">
+      <div class="flex items-center justify-between pb-3 border-b border-[#D5D4CE] mb-4">
+        <div>
+          <h2 class="text-base font-bold text-[#111111]">01. Home / Landing Page (1440 × 1040)</h2>
+          <p class="text-xs text-[#777777]">Hero + 5 circular carousel cards</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copySvgToClipboard('PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDEwNDAiIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjEwNDAiIGZpbGw9Im5vbmUiPgogICAgPHJlY3Qgd2lkdGg9IjE0NDAiIGhlaWdodD0iMTA0MCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgCiAgICA8ZyBpZD0iSGVhZGVyIj4KICAgICAgICA8cmVjdCB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgICAgIDxsaW5lIHgxPSIwIiB5MT0iNjQiIHgyPSIxNDQwIiB5Mj0iNjQiIHN0cm9rZT0iI0Q5RDlENCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgPHRleHQgeD0iMTUwIiB5PSIzOCIgZmlsbD0iIzExMTExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjIiPkhVTUFOIDx0c3BhbiBmb250LWZhbWlseT0iTmV3c3JlYWRlciwgR2VvcmdpYSwgc2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzc3Nzc3NyI+T1I8L3RzcGFuPiBBST88L3RleHQ+CiAgICAgICAgCiAgICAgICAgICAgIDxyZWN0IHg9Ijk0OCIgeT0iMTgiIHdpZHRoPSI2MCIgaGVpZ2h0PSIyOCIgcng9IjE0IiBmaWxsPSIjMTExMTExIi8+CiAgICAgICAgICAgIDx0ZXh0IHg9Ijk2MCIgeT0iMzYiIGZpbGw9IiNGNUY0RUYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+SE9NRTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEwMjgiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPlRIRSBURVNUPC90ZXh0PgogICAgICAgICAgICAKICAgICAgICAgICAgPHRleHQgeD0iMTEyOCIgeT0iMzYiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+TElCUkFSWTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEyMTkiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPkFCT1VUPC90ZXh0PgogICAgICAgICAgICAKICAgICAgICAgICAgPHRleHQgeD0iMTI5MiIgeT0iMzYiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+Q09OVEFDVDwvdGV4dD4KICAgICAgICAgICAgCiAgICA8L2c+CiAgICAKICAgIAogICAgPGcgaWQ9Ikhlcm8iIHRyYW5zZm9ybT0idHJhbnNsYXRlKDcyMCwgMTI1KSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+CiAgICAgICAgPHRleHQgeT0iMCIgZmlsbD0iIzJBNDM2NSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5WSVNVQUwgRVhQRVJJTUVOVDwvdGV4dD4KICAgICAgICA8dGV4dCB5PSI1MCIgZmlsbD0iIzExMTExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNTIiIGZvbnQtd2VpZ2h0PSI4MDAiIGxldHRlci1zcGFjaW5nPSItMSI+Q0FOIFlPVSBURUxMIFdITyBNQURFIElUPzwvdGV4dD4KICAgICAgICA8dGV4dCB5PSI4OCIgZmlsbD0iIzc3Nzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI0MDAiPkluIGFuIGVyYSB3aGVyZSBtYWNoaW5lIHN5bnRoZXNpcyByaXZhbHMgdGhlIGh1bWFuIGhhbmQsIGNhbiBpbnR1aXRpb24gc3RpbGwgZGlzY2VybiBjcmFmdCBmcm9tIGNvZGU/PC90ZXh0PgogICAgICAgIDx0ZXh0IHk9IjExMCIgZmlsbD0iIzc3Nzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI0MDAiPkV4cGxvcmUgMTUgY3VyYXRlZCBzdWJqZWN0cywgc3VibWl0IHlvdXIganVkZ21lbnQsIGFuZCB1bmNvdmVyIHdoYXQgdHJ1bHkgZ3VpZGVzIHlvdXIgYWVzdGhldGljIHBlcmNlcHRpb24uPC90ZXh0PgogICAgPC9nPgoKICAgIDxnIGlkPSJDYXJvdXNlbC01LUNhcmRzIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNTAsIDMxMCkiPgogICAgICAgIDxnIGlkPSJDYXJkLTEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsIDQwKSI+CiAgICAgICAgICAgIDxyZWN0IHdpZHRoPSIyMTAiIGhlaWdodD0iMjcwIiByeD0iMTgiIGZpbGw9IiMxQTFBMUEiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgICAgIDxyZWN0IHg9IjE0IiB5PSIxNiIgd2lkdGg9IjEwNSIgaGVpZ2h0PSIyNCIgcng9IjEyIiBmaWxsPSIjMjIyMjIyIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSIvPgogICAgICAgICAgICA8dGV4dCB4PSI2NiIgeT0iMzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjkiIGZvbnQtd2VpZ2h0PSI3MDAiPjE1LVJPVU5EIFRFU1Q8L3RleHQ+CiAgICAgICAgICAgIDx0ZXh0IHg9IjE2IiB5PSIxOTUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIj5TVEFSVCBUSEUgUVVJWjwvdGV4dD4KICAgICAgICAgICAgPHRleHQgeD0iMTYiIHk9IjIxNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjgpIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+MTUgU3ViamVjdHMg4oCiIEh1bWFuIG9yIEFJPzwvdGV4dD4KICAgICAgICAgICAgPHJlY3QgeD0iMTYiIHk9IjIyOCIgd2lkdGg9Ijk1IiBoZWlnaHQ9IjI2IiByeD0iMTMiIGZpbGw9IiNGRkYiLz4KICAgICAgICAgICAgPHRleHQgeD0iNjMiIHk9IjI0NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiPlN0YXJ0IFRlc3Qg4oaSPC90ZXh0PgogICAgICAgIDwvZz4KICAgICAgICA8ZyBpZD0iQ2FyZC0yIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMzAsIDIwKSI+CiAgICAgICAgICAgIDxyZWN0IHdpZHRoPSIyMTUiIGhlaWdodD0iMjkwIiByeD0iMTgiIGZpbGw9IiMyMzIzMjMiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgICAgIDxyZWN0IHg9IjE0IiB5PSIxNiIgd2lkdGg9IjExMiIgaGVpZ2h0PSIyNCIgcng9IjEyIiBmaWxsPSIjMkEyQTJBIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSIvPgogICAgICAgICAgICA8dGV4dCB4PSI3MCIgeT0iMzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjkiIGZvbnQtd2VpZ2h0PSI3MDAiPkZVTEwgQ0FUQUxPR1VFPC90ZXh0PgogICAgICAgICAgICA8dGV4dCB4PSIxNiIgeT0iMjEwIiBmaWxsPSIjRkZGIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjcwMCI+SU1BR0UgQVJDSElWRTwvdGV4dD4KICAgICAgICAgICAgPHRleHQgeD0iMTYiIHk9IjIzMiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjgpIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+QnJvd3NlIGFsbCAxNSBzdWJqZWN0czwvdGV4dD4KICAgICAgICAgICAgPHJlY3QgeD0iMTYiIHk9IjI0NiIgd2lkdGg9IjEwNSIgaGVpZ2h0PSIyNiIgcng9IjEzIiBmaWxsPSIjRkZGIi8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjY4IiB5PSIyNjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNzAwIj5PcGVuIExpYnJhcnkg4oaSPC90ZXh0PgogICAgICAgIDwvZz4KICAgICAgICA8ZyBpZD0iQ2FyZC0zLUNlbnRlciIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDY1LCAwKSI+CiAgICAgICAgICAgIDxyZWN0IHdpZHRoPSIyMzAiIGhlaWdodD0iMzIwIiByeD0iMjAiIGZpbGw9IiMwRDExMTciIHN0cm9rZT0iIzJBNDM2NSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICAgICAgICAgIDxyZWN0IHg9IjE2IiB5PSIxOCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSIyNiIgcng9IjEzIiBmaWxsPSIjMTYxQjIyIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4yNSkiLz4KICAgICAgICAgICAgPHRleHQgeD0iODEiIHk9IjM1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkZGIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI5LjUiIGZvbnQtd2VpZ2h0PSI3MDAiPlBFUkNFUFRJT04gTUFUUklYPC90ZXh0PgogICAgICAgICAgICA8dGV4dCB4PSIxOCIgeT0iMjM1IiBmaWxsPSIjRkZGIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjgwMCI+UkVTVUxUUyAmYW1wOyBTVEFUUzwvdGV4dD4KICAgICAgICAgICAgPHRleHQgeD0iMTgiIHk9IjI1OCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjg1KSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiPkFjY3VyYWN5IOKAoiBCaWFzIOKAoiBWaXN1YWwgQ3VlczwvdGV4dD4KICAgICAgICAgICAgPHJlY3QgeD0iMTgiIHk9IjI3MiIgd2lkdGg9IjExNSIgaGVpZ2h0PSIzMCIgcng9IjE1IiBmaWxsPSIjRkZGIi8+CiAgICAgICAgICAgIDx0ZXh0IHg9Ijc1IiB5PSIyOTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNzAwIj5WaWV3IFN0YXRzIOKGkjwvdGV4dD4KICAgICAgICA8L2c+CiAgICAgICAgPGcgaWQ9IkNhcmQtNCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzE1LCAyMCkiPgogICAgICAgICAgICA8cmVjdCB3aWR0aD0iMjE1IiBoZWlnaHQ9IjI5MCIgcng9IjE4IiBmaWxsPSIjMUYxRjFGIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMSIvPgogICAgICAgICAgICA8cmVjdCB4PSIxNCIgeT0iMTYiIHdpZHRoPSIxMTgiIGhlaWdodD0iMjQiIHJ4PSIxMiIgZmlsbD0iIzJBMkEyQSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiLz4KICAgICAgICAgICAgPHRleHQgeD0iNzMiIHk9IjMyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkZGIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI5IiBmb250LXdlaWdodD0iNzAwIj5SRVNFQVJDSCBTVFVEWTwvdGV4dD4KICAgICAgICAgICAgPHRleHQgeD0iMTYiIHk9IjIxMCIgZmlsbD0iI0ZGRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3MDAiPkFCT1VUIFRIRSBTVFVEWTwvdGV4dD4KICAgICAgICAgICAgPHRleHQgeD0iMTYiIHk9IjIzMiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjgpIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+QWVzdGhldGljIHZhbHVlICZhbXA7IHBlcmNlcHRpb248L3RleHQ+CiAgICAgICAgICAgIDxyZWN0IHg9IjE2IiB5PSIyNDYiIHdpZHRoPSIxMDUiIGhlaWdodD0iMjYiIHJ4PSIxMyIgZmlsbD0iI0ZGRiIvPgogICAgICAgICAgICA8dGV4dCB4PSI2OCIgeT0iMjYzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMTExIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjcwMCI+UmVhZCBTdHVkeSDihpI8L3RleHQ+CiAgICAgICAgPC9nPgogICAgICAgIDxnIGlkPSJDYXJkLTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDk1MCwgNDApIj4KICAgICAgICAgICAgPHJlY3Qgd2lkdGg9IjIxMCIgaGVpZ2h0PSIyNzAiIHJ4PSIxOCIgZmlsbD0iIzFBMUExQSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz4KICAgICAgICAgICAgPHJlY3QgeD0iMTQiIHk9IjE2IiB3aWR0aD0iMTMwIiBoZWlnaHQ9IjI0IiByeD0iMTIiIGZpbGw9IiMyMjIyMjIiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIi8+CiAgICAgICAgICAgIDx0ZXh0IHg9Ijc5IiB5PSIzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0ZGRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOSIgZm9udC13ZWlnaHQ9IjcwMCI+Q09NTVVOSVRZICZhbXA7IElOUVVJUlk8L3RleHQ+CiAgICAgICAgICAgIDx0ZXh0IHg9IjE2IiB5PSIxOTUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIj5HRVQgSU4gVE9VQ0g8L3RleHQ+CiAgICAgICAgICAgIDx0ZXh0IHg9IjE2IiB5PSIyMTUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC44KSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPkZlZWRiYWNrICZhbXA7IHJlc2VhcmNoIGlucXVpcnk8L3RleHQ+CiAgICAgICAgICAgIDxyZWN0IHg9IjE2IiB5PSIyMjgiIHdpZHRoPSIxMDUiIGhlaWdodD0iMjYiIHJ4PSIxMyIgZmlsbD0iI0ZGRiIvPgogICAgICAgICAgICA8dGV4dCB4PSI2OCIgeT0iMjQ1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMTExIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjcwMCI+Q29udGFjdCBVcyDihpI8L3RleHQ+CiAgICAgICAgPC9nPgogICAgPC9nPgoKICAgIDx0ZXh0IHg9IjcyMCIgeT0iNzMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOTk5IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjUwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPkRSQUcgVE8gUk9UQVRFIDNEIEFSQ0hJVkUgIOKAoiAgQ0xJQ0sgQU5ZIENBUkQgVE8gRVhQTE9SRTwvdGV4dD4KICAgIAogICAgPGcgaWQ9IkZvb3RlciIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwgOTQwKSI+CiAgICAgICAgPGxpbmUgeDE9IjE1MCIgeTE9IjAiIHgyPSIxMjkwIiB5Mj0iMCIgc3Ryb2tlPSIjRDlEOUQ0IiBzdHJva2Utd2lkdGg9IjEiLz4KICAgICAgICA8dGV4dCB4PSIxNTAiIHk9IjM1IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjQwMCI+SFVNQU4gT1IgQUk/IOKAlCBJbnRlcmFjdGl2ZSBWaXN1YWwgRXhwZXJpbWVudDwvdGV4dD4KICAgICAgICA8dGV4dCB4PSIxMjkwIiB5PSIzNSIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzc3Nzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI0MDAiPkludGVyYWN0aXZlIERlc2lnbiBQcm90b3R5cGU8L3RleHQ+CiAgICA8L2c+CiAgICAKPC9zdmc+', '01. Home / Landing Page (1440 × 1040)')" class="bg-[#111111] hover:bg-[#2A4365] text-white text-xs font-semibold px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            Copy for Figma (Ctrl+V)
+          </button>
+          <a href="/figma-export/01_landing_home.svg" download="01_landing_home.svg" class="bg-white border border-[#D9D9D4] hover:bg-gray-50 text-[#111] text-xs font-medium px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Download SVG
+          </a>
+        </div>
+      </div>
+      <div class="svg-canvas">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1040" width="1440" height="1040" fill="none">
+    <rect width="1440" height="1040" fill="#F5F4EF"/>
+    
+    <g id="Header">
+        <rect width="1440" height="64" fill="#F5F4EF"/>
+        <line x1="0" y1="64" x2="1440" y2="64" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="38" fill="#111111" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">HUMAN <tspan font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="400" fill="#777777">OR</tspan> AI?</text>
+        
+            <rect x="948" y="18" width="60" height="28" rx="14" fill="#111111"/>
+            <text x="960" y="36" fill="#F5F4EF" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">HOME</text>
+            
+            <text x="1028" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">THE TEST</text>
+            
+            <text x="1128" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">LIBRARY</text>
+            
+            <text x="1219" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">ABOUT</text>
+            
+            <text x="1292" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">CONTACT</text>
+            
+    </g>
+    
+    
+    <g id="Hero" transform="translate(720, 125)" text-anchor="middle">
+        <text y="0" fill="#2A4365" font-family="Poppins, sans-serif" font-size="11" font-weight="700" letter-spacing="2">VISUAL EXPERIMENT</text>
+        <text y="50" fill="#111111" font-family="Poppins, sans-serif" font-size="52" font-weight="800" letter-spacing="-1">CAN YOU TELL WHO MADE IT?</text>
+        <text y="88" fill="#777777" font-family="Poppins, sans-serif" font-size="14" font-weight="400">In an era where machine synthesis rivals the human hand, can intuition still discern craft from code?</text>
+        <text y="110" fill="#777777" font-family="Poppins, sans-serif" font-size="14" font-weight="400">Explore 15 curated subjects, submit your judgment, and uncover what truly guides your aesthetic perception.</text>
+    </g>
+
+    <g id="Carousel-5-Cards" transform="translate(150, 310)">
+        <g id="Card-1" transform="translate(0, 40)">
+            <rect width="210" height="270" rx="18" fill="#1A1A1A" stroke="#000" stroke-width="1"/>
+            <rect x="14" y="16" width="105" height="24" rx="12" fill="#222222" stroke="rgba(255,255,255,0.2)"/>
+            <text x="66" y="32" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="9" font-weight="700">15-ROUND TEST</text>
+            <text x="16" y="195" fill="#FFF" font-family="Poppins, sans-serif" font-size="16" font-weight="700">START THE QUIZ</text>
+            <text x="16" y="215" fill="rgba(255,255,255,0.8)" font-family="Poppins, sans-serif" font-size="11">15 Subjects • Human or AI?</text>
+            <rect x="16" y="228" width="95" height="26" rx="13" fill="#FFF"/>
+            <text x="63" y="245" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="10" font-weight="700">Start Test →</text>
+        </g>
+        <g id="Card-2" transform="translate(230, 20)">
+            <rect width="215" height="290" rx="18" fill="#232323" stroke="#000" stroke-width="1"/>
+            <rect x="14" y="16" width="112" height="24" rx="12" fill="#2A2A2A" stroke="rgba(255,255,255,0.2)"/>
+            <text x="70" y="32" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="9" font-weight="700">FULL CATALOGUE</text>
+            <text x="16" y="210" fill="#FFF" font-family="Poppins, sans-serif" font-size="17" font-weight="700">IMAGE ARCHIVE</text>
+            <text x="16" y="232" fill="rgba(255,255,255,0.8)" font-family="Poppins, sans-serif" font-size="11">Browse all 15 subjects</text>
+            <rect x="16" y="246" width="105" height="26" rx="13" fill="#FFF"/>
+            <text x="68" y="263" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="10" font-weight="700">Open Library →</text>
+        </g>
+        <g id="Card-3-Center" transform="translate(465, 0)">
+            <rect width="230" height="320" rx="20" fill="#0D1117" stroke="#2A4365" stroke-width="2"/>
+            <rect x="16" y="18" width="130" height="26" rx="13" fill="#161B22" stroke="rgba(255,255,255,0.25)"/>
+            <text x="81" y="35" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="9.5" font-weight="700">PERCEPTION MATRIX</text>
+            <text x="18" y="235" fill="#FFF" font-family="Poppins, sans-serif" font-size="20" font-weight="800">RESULTS &amp; STATS</text>
+            <text x="18" y="258" fill="rgba(255,255,255,0.85)" font-family="Poppins, sans-serif" font-size="12">Accuracy • Bias • Visual Cues</text>
+            <rect x="18" y="272" width="115" height="30" rx="15" fill="#FFF"/>
+            <text x="75" y="291" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="11" font-weight="700">View Stats →</text>
+        </g>
+        <g id="Card-4" transform="translate(715, 20)">
+            <rect width="215" height="290" rx="18" fill="#1F1F1F" stroke="#000" stroke-width="1"/>
+            <rect x="14" y="16" width="118" height="24" rx="12" fill="#2A2A2A" stroke="rgba(255,255,255,0.2)"/>
+            <text x="73" y="32" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="9" font-weight="700">RESEARCH STUDY</text>
+            <text x="16" y="210" fill="#FFF" font-family="Poppins, sans-serif" font-size="17" font-weight="700">ABOUT THE STUDY</text>
+            <text x="16" y="232" fill="rgba(255,255,255,0.8)" font-family="Poppins, sans-serif" font-size="11">Aesthetic value &amp; perception</text>
+            <rect x="16" y="246" width="105" height="26" rx="13" fill="#FFF"/>
+            <text x="68" y="263" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="10" font-weight="700">Read Study →</text>
+        </g>
+        <g id="Card-5" transform="translate(950, 40)">
+            <rect width="210" height="270" rx="18" fill="#1A1A1A" stroke="#000" stroke-width="1"/>
+            <rect x="14" y="16" width="130" height="24" rx="12" fill="#222222" stroke="rgba(255,255,255,0.2)"/>
+            <text x="79" y="32" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="9" font-weight="700">COMMUNITY &amp; INQUIRY</text>
+            <text x="16" y="195" fill="#FFF" font-family="Poppins, sans-serif" font-size="16" font-weight="700">GET IN TOUCH</text>
+            <text x="16" y="215" fill="rgba(255,255,255,0.8)" font-family="Poppins, sans-serif" font-size="11">Feedback &amp; research inquiry</text>
+            <rect x="16" y="228" width="105" height="26" rx="13" fill="#FFF"/>
+            <text x="68" y="245" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="10" font-weight="700">Contact Us →</text>
+        </g>
+    </g>
+
+    <text x="720" y="730" text-anchor="middle" fill="#999" font-family="Poppins, sans-serif" font-size="11" font-weight="500" letter-spacing="1">DRAG TO ROTATE 3D ARCHIVE  •  CLICK ANY CARD TO EXPLORE</text>
+    
+    <g id="Footer" transform="translate(0, 940)">
+        <line x1="150" y1="0" x2="1290" y2="0" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="35" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">HUMAN OR AI? — Interactive Visual Experiment</text>
+        <text x="1290" y="35" text-anchor="end" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">Interactive Design Prototype</text>
+    </g>
+    
+</svg>
+      </div>
+    </div>
+    
+    <div class="artboard-container">
+      <div class="flex items-center justify-between pb-3 border-b border-[#D5D4CE] mb-4">
+        <div>
+          <h2 class="text-base font-bold text-[#111111]">02. The Test / Quiz Page (1440 × 980)</h2>
+          <p class="text-xs text-[#777777]">Perception test, subject viewer & factors</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copySvgToClipboard('PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDEyMDAiIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjEyMDAiIGZpbGw9Im5vbmUiPgogICAgPHJlY3Qgd2lkdGg9IjE0NDAiIGhlaWdodD0iMTIwMCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgCiAgICA8ZyBpZD0iSGVhZGVyIj4KICAgICAgICA8cmVjdCB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgICAgIDxsaW5lIHgxPSIwIiB5MT0iNjQiIHgyPSIxNDQwIiB5Mj0iNjQiIHN0cm9rZT0iI0Q5RDlENCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgPHRleHQgeD0iMTUwIiB5PSIzOCIgZmlsbD0iIzExMTExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjIiPkhVTUFOIDx0c3BhbiBmb250LWZhbWlseT0iTmV3c3JlYWRlciwgR2VvcmdpYSwgc2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzc3Nzc3NyI+T1I8L3RzcGFuPiBBST88L3RleHQ+CiAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9Ijk2MCIgeT0iMzYiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+SE9NRTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDxyZWN0IHg9IjEwMTIiIHk9IjE4IiB3aWR0aD0iOTYiIGhlaWdodD0iMjgiIHJ4PSIxNCIgZmlsbD0iIzExMTExMSIvPgogICAgICAgICAgICA8dGV4dCB4PSIxMDI0IiB5PSIzNiIgZmlsbD0iI0Y1RjRFRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiIGxldHRlci1zcGFjaW5nPSIxIj5USEUgVEVTVDwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjExMjgiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPkxJQlJBUlk8L3RleHQ+CiAgICAgICAgICAgIAogICAgICAgICAgICA8dGV4dCB4PSIxMjE5IiB5PSIzNiIgZmlsbD0iIzc3Nzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiIGxldHRlci1zcGFjaW5nPSIxIj5BQk9VVDwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEyOTIiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPkNPTlRBQ1Q8L3RleHQ+CiAgICAgICAgICAgIAogICAgPC9nPgogICAgCgogICAgPGcgaWQ9IlF1aXotQ29udGFpbmVyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMDAsIDk1KSI+CiAgICAgICAgPCEtLSBQcm9ncmVzcyAtLT4KICAgICAgICA8dGV4dCB4PSIwIiB5PSIyMiIgZmlsbD0iIzJBNDM2NSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjUiPlJPVU5EIDEgT0YgMTU8L3RleHQ+CiAgICAgICAgPHJlY3QgeD0iNzQwIiB5PSI2IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjI0IiByeD0iMTIiIGZpbGw9IiNFQ0VCRTYiLz4KICAgICAgICA8dGV4dCB4PSI3OTAiIHk9IjIyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMC41IiBmb250LXdlaWdodD0iNzAwIj5CRUdJTk5FUjwvdGV4dD4KICAgICAgICA8bGluZSB4MT0iMCIgeTE9IjQyIiB4Mj0iODQwIiB5Mj0iNDIiIHN0cm9rZT0iI0Q5RDlENCIvPgoKICAgICAgICA8IS0tIFRpdGxlIC0tPgogICAgICAgIDx0ZXh0IHg9IjQyMCIgeT0iODUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIj5XSUxETElGRSBQSE9UT0dSQVBIWSDigJQgRk9YPC90ZXh0PgoKICAgICAgICA8IS0tIE1haW4gSW1hZ2UgLS0+CiAgICAgICAgPGcgaWQ9IlN1YmplY3QtSW1hZ2UiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwLCAxMTApIj4KICAgICAgICAgICAgPHJlY3Qgd2lkdGg9Ijc4MCIgaGVpZ2h0PSI0NDAiIHJ4PSIyMCIgZmlsbD0iIzFDMUMxQyIgc3Ryb2tlPSIjRDlEOUQ0Ii8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjM5MCIgeT0iMjMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjODg4IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSI+WyBIaWdoLVJlc29sdXRpb24gU3ViamVjdCBQaG90b2dyYXBoeTogRm94IF08L3RleHQ+CiAgICAgICAgICAgIDxyZWN0IHg9IjY1MCIgeT0iMzkwIiB3aWR0aD0iMTE1IiBoZWlnaHQ9IjM0IiByeD0iMTciIGZpbGw9InJnYmEoMTcsMTcsMTcsMC44KSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiLz4KICAgICAgICAgICAgPHRleHQgeD0iNzA3IiB5PSI0MTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIj7wn5SNIEluc3BlY3Q8L3RleHQ+CiAgICAgICAgPC9nPgoKICAgICAgICA8IS0tIE91dGNvbWUgQmFubmVyIC0tPgogICAgICAgIDxnIGlkPSJPdXRjb21lLUJhbm5lciIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAsIDU3NSkiPgogICAgICAgICAgICA8cmVjdCB3aWR0aD0iNzgwIiBoZWlnaHQ9IjUyIiByeD0iMTQiIGZpbGw9IiMxMEI5ODEiIGZpbGwtb3BhY2l0eT0iMC4xMiIgc3Ryb2tlPSIjMTBCOTgxIiBzdHJva2Utb3BhY2l0eT0iMC4zNSIvPgogICAgICAgICAgICA8dGV4dCB4PSIyNCIgeT0iMzIiIGZpbGw9IiMwNjVGNDYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iODAwIj5DT1JSRUNUIERFQ0lTSU9OITwvdGV4dD4KICAgICAgICAgICAgPHJlY3QgeD0iNjQwIiB5PSIxNCIgd2lkdGg9IjExNiIgaGVpZ2h0PSIyNSIgcng9IjEyLjUiIGZpbGw9IiMxMEI5ODEiLz4KICAgICAgICAgICAgPHRleHQgeD0iNjk4IiB5PSIzMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0ZGRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjcwMCI+SFVNQU4gTUFERTwvdGV4dD4KICAgICAgICA8L2c+CgogICAgICAgIDwhLS0gRXhwbGFuYXRpb24gQ2FyZCAtLT4KICAgICAgICA8ZyBpZD0iRXhwbGFuYXRpb24iIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwLCA2NDUpIj4KICAgICAgICAgICAgPHJlY3Qgd2lkdGg9Ijc4MCIgaGVpZ2h0PSIxMjAiIHJ4PSIxNiIgZmlsbD0iI0ZGRiIgc3Ryb2tlPSIjRDlEOUQ0Ii8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjI0IiB5PSIzMiIgZmlsbD0iIzIyMiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiPk5hdHVyYWwgb3B0aWNhbCBkZXB0aCBvZiBmaWVsZCBjbGVhbmx5IHNlcGFyYXRlcyB0aGUgZm94IGZyb20gdGhlIGRhcmsgd29vZGxhbmQgdW5kZXJzdG9yeS48L3RleHQ+CiAgICAgICAgICAgIDx0ZXh0IHg9IjI0IiB5PSI1NCIgZmlsbD0iIzIyMiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiPkZpbmUgZnVyIHdoaXNrZXJzLCBncm91bmRlZCBzb2lsIHRleHR1cmUsIGFuZCBhdXRoZW50aWMgb3B0aWNhbCB2aWduZXR0aW5nIHNob3cgZ2VudWluZSBsZW5zIHBoeXNpY3MuPC90ZXh0PgogICAgICAgICAgICA8bGluZSB4MT0iMjQiIHkxPSI3NCIgeDI9Ijc1NiIgeTI9Ijc0IiBzdHJva2U9IiNGMEVGRUEiLz4KICAgICAgICAgICAgPHRleHQgeD0iMjQiIHk9Ijk4IiBmaWxsPSIjNzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiI+PHRzcGFuIGZvbnQtd2VpZ2h0PSI2MDAiIGZpbGw9IiMzMzMiPlByb2R1Y3Rpb24gQ29udGV4dDo8L3RzcGFuPiBQaG90b2dyYXBoZWQgb24gaGlnaC1zcGVlZCB0ZWxlcGhvdG8gbGVucyBpbiBuYXR1cmFsIEJyaXRpc2ggd29vZGxhbmQuPC90ZXh0PgogICAgICAgIDwvZz4KCiAgICAgICAgPCEtLSBGYWN0b3JzIENoZWNrbGlzdCAtLT4KICAgICAgICA8ZyBpZD0iRmFjdG9ycyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAsIDc4NSkiPgogICAgICAgICAgICA8cmVjdCB3aWR0aD0iNzgwIiBoZWlnaHQ9Ijk2IiByeD0iMTYiIGZpbGw9IiNGRkYiIHN0cm9rZT0iI0Q5RDlENCIvPgogICAgICAgICAgICA8dGV4dCB4PSIyNCIgeT0iMjgiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI3MDAiPldIQVQgSU5GTFVFTkNFRCBZT1VSIERFQ0lTSU9OPzwvdGV4dD4KICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjQsIDQyKSI+CiAgICAgICAgICAgICAgICA8cmVjdCB4PSIwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiMxMTEiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjYwIiB5PSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0ZGRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiPlZpc3VhbCBRdWFsaXR5PC90ZXh0PgogICAgICAgICAgICAgICAgPHJlY3QgeD0iMTMwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiMxMTEiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjE4MCIgeT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIj5BdXRoZW50aWNpdHk8L3RleHQ+CiAgICAgICAgICAgICAgICA8cmVjdCB4PSIyNDAiIHdpZHRoPSI5MCIgaGVpZ2h0PSIzMiIgcng9IjE2IiBmaWxsPSIjRkZGIiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjI4NSIgeT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIj5PcmlnaW5hbGl0eTwvdGV4dD4KICAgICAgICAgICAgICAgIDxyZWN0IHg9IjM0MCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiNGRkYiIHN0cm9rZT0iI0Q5RDlENCIvPgogICAgICAgICAgICAgICAgPHRleHQgeD0iMzc1IiB5PSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiPkVmZm9ydDwvdGV4dD4KICAgICAgICAgICAgICAgIDxyZWN0IHg9IjQyMCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiNGRkYiIHN0cm9rZT0iI0Q5RDlENCIvPgogICAgICAgICAgICAgICAgPHRleHQgeD0iNDU1IiB5PSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU1NSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiPlN0eWxlPC90ZXh0PgogICAgICAgICAgICAgICAgPHJlY3QgeD0iNTAwIiB3aWR0aD0iOTUiIGhlaWdodD0iMzIiIHJ4PSIxNiIgZmlsbD0iI0ZGRiIgc3Ryb2tlPSIjRDlEOUQ0Ii8+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSI1NDciIHk9IjIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNTU1IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCI+RmFtaWxpYXJpdHk8L3RleHQ+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CgogICAgICAgIDwhLS0gTmV4dCBCdXR0b24gLS0+CiAgICAgICAgPHJlY3QgeD0iMzAiIHk9IjkwMCIgd2lkdGg9Ijc4MCIgaGVpZ2h0PSI1MiIgcng9IjE0IiBmaWxsPSIjMTExIi8+CiAgICAgICAgPHRleHQgeD0iNDIwIiB5PSI5MzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNzAwIj5ORVhUIFNVQkpFQ1Qg4oaSPC90ZXh0PgogICAgPC9nPgoKICAgIAogICAgPGcgaWQ9IkZvb3RlciIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwgMTEyMCkiPgogICAgICAgIDxsaW5lIHgxPSIxNTAiIHkxPSIwIiB4Mj0iMTI5MCIgeTI9IjAiIHN0cm9rZT0iI0Q5RDlENCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgPHRleHQgeD0iMTUwIiB5PSIzNSIgZmlsbD0iIzc3Nzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI0MDAiPkhVTUFOIE9SIEFJPyDigJQgSW50ZXJhY3RpdmUgVmlzdWFsIEV4cGVyaW1lbnQ8L3RleHQ+CiAgICAgICAgPHRleHQgeD0iMTI5MCIgeT0iMzUiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNDAwIj5JbnRlcmFjdGl2ZSBEZXNpZ24gUHJvdG90eXBlPC90ZXh0PgogICAgPC9nPgogICAgCjwvc3ZnPg==', '02. The Test / Quiz Page (1440 × 980)')" class="bg-[#111111] hover:bg-[#2A4365] text-white text-xs font-semibold px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            Copy for Figma (Ctrl+V)
+          </button>
+          <a href="/figma-export/02_the_test_quiz.svg" download="02_the_test_quiz.svg" class="bg-white border border-[#D9D9D4] hover:bg-gray-50 text-[#111] text-xs font-medium px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Download SVG
+          </a>
+        </div>
+      </div>
+      <div class="svg-canvas">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1200" width="1440" height="1200" fill="none">
+    <rect width="1440" height="1200" fill="#F5F4EF"/>
+    
+    <g id="Header">
+        <rect width="1440" height="64" fill="#F5F4EF"/>
+        <line x1="0" y1="64" x2="1440" y2="64" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="38" fill="#111111" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">HUMAN <tspan font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="400" fill="#777777">OR</tspan> AI?</text>
+        
+            <text x="960" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">HOME</text>
+            
+            <rect x="1012" y="18" width="96" height="28" rx="14" fill="#111111"/>
+            <text x="1024" y="36" fill="#F5F4EF" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">THE TEST</text>
+            
+            <text x="1128" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">LIBRARY</text>
+            
+            <text x="1219" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">ABOUT</text>
+            
+            <text x="1292" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">CONTACT</text>
+            
+    </g>
+    
+
+    <g id="Quiz-Container" transform="translate(300, 95)">
+        <!-- Progress -->
+        <text x="0" y="22" fill="#2A4365" font-family="Poppins, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">ROUND 1 OF 15</text>
+        <rect x="740" y="6" width="100" height="24" rx="12" fill="#ECEBE6"/>
+        <text x="790" y="22" text-anchor="middle" fill="#333" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">BEGINNER</text>
+        <line x1="0" y1="42" x2="840" y2="42" stroke="#D9D9D4"/>
+
+        <!-- Title -->
+        <text x="420" y="85" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="24" font-weight="700">WILDLIFE PHOTOGRAPHY — FOX</text>
+
+        <!-- Main Image -->
+        <g id="Subject-Image" transform="translate(30, 110)">
+            <rect width="780" height="440" rx="20" fill="#1C1C1C" stroke="#D9D9D4"/>
+            <text x="390" y="230" text-anchor="middle" fill="#888" font-family="Poppins, sans-serif" font-size="15">[ High-Resolution Subject Photography: Fox ]</text>
+            <rect x="650" y="390" width="115" height="34" rx="17" fill="rgba(17,17,17,0.8)" stroke="rgba(255,255,255,0.2)"/>
+            <text x="707" y="412" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11" font-weight="600">🔍 Inspect</text>
+        </g>
+
+        <!-- Outcome Banner -->
+        <g id="Outcome-Banner" transform="translate(30, 575)">
+            <rect width="780" height="52" rx="14" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.35"/>
+            <text x="24" y="32" fill="#065F46" font-family="Poppins, sans-serif" font-size="14" font-weight="800">CORRECT DECISION!</text>
+            <rect x="640" y="14" width="116" height="25" rx="12.5" fill="#10B981"/>
+            <text x="698" y="30" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">HUMAN MADE</text>
+        </g>
+
+        <!-- Explanation Card -->
+        <g id="Explanation" transform="translate(30, 645)">
+            <rect width="780" height="120" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="24" y="32" fill="#222" font-family="Poppins, sans-serif" font-size="13">Natural optical depth of field cleanly separates the fox from the dark woodland understory.</text>
+            <text x="24" y="54" fill="#222" font-family="Poppins, sans-serif" font-size="13">Fine fur whiskers, grounded soil texture, and authentic optical vignetting show genuine lens physics.</text>
+            <line x1="24" y1="74" x2="756" y2="74" stroke="#F0EFEA"/>
+            <text x="24" y="98" fill="#777" font-family="Poppins, sans-serif" font-size="12"><tspan font-weight="600" fill="#333">Production Context:</tspan> Photographed on high-speed telephoto lens in natural British woodland.</text>
+        </g>
+
+        <!-- Factors Checklist -->
+        <g id="Factors" transform="translate(30, 785)">
+            <rect width="780" height="96" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="24" y="28" fill="#777" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">WHAT INFLUENCED YOUR DECISION?</text>
+            <g transform="translate(24, 42)">
+                <rect x="0" width="120" height="32" rx="16" fill="#111"/>
+                <text x="60" y="20" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Visual Quality</text>
+                <rect x="130" width="100" height="32" rx="16" fill="#111"/>
+                <text x="180" y="20" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Authenticity</text>
+                <rect x="240" width="90" height="32" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="285" y="20" text-anchor="middle" fill="#555" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Originality</text>
+                <rect x="340" width="70" height="32" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="375" y="20" text-anchor="middle" fill="#555" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Effort</text>
+                <rect x="420" width="70" height="32" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="455" y="20" text-anchor="middle" fill="#555" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Style</text>
+                <rect x="500" width="95" height="32" rx="16" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="547" y="20" text-anchor="middle" fill="#555" font-family="Poppins, sans-serif" font-size="11" font-weight="600">Familiarity</text>
+            </g>
+        </g>
+
+        <!-- Next Button -->
+        <rect x="30" y="900" width="780" height="52" rx="14" fill="#111"/>
+        <text x="420" y="932" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="13" font-weight="700">NEXT SUBJECT →</text>
+    </g>
+
+    
+    <g id="Footer" transform="translate(0, 1120)">
+        <line x1="150" y1="0" x2="1290" y2="0" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="35" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">HUMAN OR AI? — Interactive Visual Experiment</text>
+        <text x="1290" y="35" text-anchor="end" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">Interactive Design Prototype</text>
+    </g>
+    
+</svg>
+      </div>
+    </div>
+    
+    <div class="artboard-container">
+      <div class="flex items-center justify-between pb-3 border-b border-[#D5D4CE] mb-4">
+        <div>
+          <h2 class="text-base font-bold text-[#111111]">03. Image Library / Archive (1440 × 920)</h2>
+          <p class="text-xs text-[#777777]">Cylindrical 3D gallery layout</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copySvgToClipboard('PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDk4MCIgd2lkdGg9IjE0NDAiIGhlaWdodD0iOTgwIiBmaWxsPSJub25lIj4KICAgIDxyZWN0IHdpZHRoPSIxNDQwIiBoZWlnaHQ9Ijk4MCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgCiAgICA8ZyBpZD0iSGVhZGVyIj4KICAgICAgICA8cmVjdCB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgICAgIDxsaW5lIHgxPSIwIiB5MT0iNjQiIHgyPSIxNDQwIiB5Mj0iNjQiIHN0cm9rZT0iI0Q5RDlENCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgPHRleHQgeD0iMTUwIiB5PSIzOCIgZmlsbD0iIzExMTExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjIiPkhVTUFOIDx0c3BhbiBmb250LWZhbWlseT0iTmV3c3JlYWRlciwgR2VvcmdpYSwgc2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzc3Nzc3NyI+T1I8L3RzcGFuPiBBST88L3RleHQ+CiAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9Ijk2MCIgeT0iMzYiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+SE9NRTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEwMjQiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPlRIRSBURVNUPC90ZXh0PgogICAgICAgICAgICAKICAgICAgICAgICAgPHJlY3QgeD0iMTExMiIgeT0iMTgiIHdpZHRoPSI4NyIgaGVpZ2h0PSIyOCIgcng9IjE0IiBmaWxsPSIjMTExMTExIi8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjExMjQiIHk9IjM2IiBmaWxsPSIjRjVGNEVGIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPkxJQlJBUlk8L3RleHQ+CiAgICAgICAgICAgIAogICAgICAgICAgICA8dGV4dCB4PSIxMjE5IiB5PSIzNiIgZmlsbD0iIzc3Nzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiIGxldHRlci1zcGFjaW5nPSIxIj5BQk9VVDwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEyOTIiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPkNPTlRBQ1Q8L3RleHQ+CiAgICAgICAgICAgIAogICAgPC9nPgogICAgCgogICAgPCEtLSAzRCBTZW1pLUNpcmNsZSBBcmNoIC0tPgogICAgPGcgaWQ9IkFyY2gtQ2FyZHMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDcyMCwgNDgwKSI+CiAgICAgICAgPCEtLSBDZW50ZXIgRm9jdXMgQ2FyZCAtLT4KICAgICAgICA8ZyBpZD0iQWN0aXZlLUNhcmQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNjAsIC0yMTApIj4KICAgICAgICAgICAgPHJlY3Qgd2lkdGg9IjMyMCIgaGVpZ2h0PSI0MjAiIHJ4PSIyMCIgZmlsbD0iI0ZGRiIgc3Ryb2tlPSIjRDlEOUQ0IiBmaWx0ZXI9ImRyb3Atc2hhZG93KDAgMjVweCA1MHB4IHJnYmEoMCwwLDAsMC4xOCkpIi8+CiAgICAgICAgICAgIDxyZWN0IHg9IjgiIHk9IjgiIHdpZHRoPSIzMDQiIGhlaWdodD0iNDA0IiByeD0iMTQiIGZpbGw9IiMxQzFDMUMiLz4KICAgICAgICAgICAgPHRleHQgeD0iMTYwIiB5PSIxOTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIj5bIFJFRCBGT1gg4oCiIEJSSVRJU0ggV09PRExBTkQgXTwvdGV4dD4KICAgICAgICAgICAgPHRleHQgeD0iMTYwIiB5PSIyMTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNBQUEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIj5DbGljayBDYXJkIHRvIEZsaXAgM0QgQW5hbHlzaXMg4oa6PC90ZXh0PgogICAgICAgICAgICA8cmVjdCB4PSI5NSIgeT0iMzYwIiB3aWR0aD0iMTMwIiBoZWlnaHQ9IjI4IiByeD0iMTQiIGZpbGw9IiMxMEI5ODEiLz4KICAgICAgICAgICAgPHRleHQgeD0iMTYwIiB5PSIzNzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI3MDAiPkhVTUFOIE1BREU8L3RleHQ+CiAgICAgICAgPC9nPgogICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00NjAsIC0xODApIHJvdGF0ZSgxMikiPgogICAgICAgICAgICA8cmVjdCB3aWR0aD0iMjUwIiBoZWlnaHQ9IjM0MCIgcng9IjE2IiBmaWxsPSIjMUUxRTFFIiBzdHJva2U9IiNDQ0MiIG9wYWNpdHk9IjAuODUiLz4KICAgICAgICAgICAgPHRleHQgeD0iMTI1IiB5PSIxNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNBQUEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIj5bIEdJQU5UIFBBTkRBIOKAoiBBSSBdPC90ZXh0PgogICAgICAgIDwvZz4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNDAsIC0xODApIHJvdGF0ZSgtMTIpIj4KICAgICAgICAgICAgPHJlY3Qgd2lkdGg9IjI1MCIgaGVpZ2h0PSIzNDAiIHJ4PSIxNiIgZmlsbD0iIzFFMUUxRSIgc3Ryb2tlPSIjQ0NDIiBvcGFjaXR5PSIwLjg1Ii8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjEyNSIgeT0iMTcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjQUFBIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiI+WyBIVU1BTiBQT1JUUkFJVCBdPC90ZXh0PgogICAgICAgIDwvZz4KICAgIDwvZz4KCiAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3MjAsIDgzMCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPgogICAgICAgIDx0ZXh0IHk9IjAiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+V0lMRExJRkUgUEhPVE9HUkFQSFkg4oCUIEZPWDwvdGV4dD4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTQwLCAxNikiPgogICAgICAgICAgICA8cmVjdCB3aWR0aD0iMjgwIiBoZWlnaHQ9IjM4IiByeD0iMTkiIGZpbGw9IiNGRkYiIHN0cm9rZT0icmdiYSgwLDAsMCwwLjE1KSIvPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIyMiIgY3k9IjE5IiByPSI0IiBmaWxsPSIjMTBCOTgxIi8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjE0NSIgeT0iMjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNzAwIj5DTElDSyBDQVJEIFRPIFpPT00gJmFtcDsgSU5TUEVDVDwvdGV4dD4KICAgICAgICA8L2c+CiAgICA8L2c+CiAgICAKICAgIDxnIGlkPSJGb290ZXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsIDkxMCkiPgogICAgICAgIDxsaW5lIHgxPSIxNTAiIHkxPSIwIiB4Mj0iMTI5MCIgeTI9IjAiIHN0cm9rZT0iI0Q5RDlENCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgPHRleHQgeD0iMTUwIiB5PSIzNSIgZmlsbD0iIzc3Nzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI0MDAiPkhVTUFOIE9SIEFJPyDigJQgSW50ZXJhY3RpdmUgVmlzdWFsIEV4cGVyaW1lbnQ8L3RleHQ+CiAgICAgICAgPHRleHQgeD0iMTI5MCIgeT0iMzUiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNDAwIj5JbnRlcmFjdGl2ZSBEZXNpZ24gUHJvdG90eXBlPC90ZXh0PgogICAgPC9nPgogICAgCjwvc3ZnPg==', '03. Image Library / Archive (1440 × 920)')" class="bg-[#111111] hover:bg-[#2A4365] text-white text-xs font-semibold px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            Copy for Figma (Ctrl+V)
+          </button>
+          <a href="/figma-export/03_image_library_archive.svg" download="03_image_library_archive.svg" class="bg-white border border-[#D9D9D4] hover:bg-gray-50 text-[#111] text-xs font-medium px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Download SVG
+          </a>
+        </div>
+      </div>
+      <div class="svg-canvas">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 980" width="1440" height="980" fill="none">
+    <rect width="1440" height="980" fill="#F5F4EF"/>
+    
+    <g id="Header">
+        <rect width="1440" height="64" fill="#F5F4EF"/>
+        <line x1="0" y1="64" x2="1440" y2="64" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="38" fill="#111111" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">HUMAN <tspan font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="400" fill="#777777">OR</tspan> AI?</text>
+        
+            <text x="960" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">HOME</text>
+            
+            <text x="1024" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">THE TEST</text>
+            
+            <rect x="1112" y="18" width="87" height="28" rx="14" fill="#111111"/>
+            <text x="1124" y="36" fill="#F5F4EF" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">LIBRARY</text>
+            
+            <text x="1219" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">ABOUT</text>
+            
+            <text x="1292" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">CONTACT</text>
+            
+    </g>
+    
+
+    <!-- 3D Semi-Circle Arch -->
+    <g id="Arch-Cards" transform="translate(720, 480)">
+        <!-- Center Focus Card -->
+        <g id="Active-Card" transform="translate(-160, -210)">
+            <rect width="320" height="420" rx="20" fill="#FFF" stroke="#D9D9D4" filter="drop-shadow(0 25px 50px rgba(0,0,0,0.18))"/>
+            <rect x="8" y="8" width="304" height="404" rx="14" fill="#1C1C1C"/>
+            <text x="160" y="190" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="14" font-weight="700">[ RED FOX • BRITISH WOODLAND ]</text>
+            <text x="160" y="215" text-anchor="middle" fill="#AAA" font-family="Poppins, sans-serif" font-size="11">Click Card to Flip 3D Analysis ↺</text>
+            <rect x="95" y="360" width="130" height="28" rx="14" fill="#10B981"/>
+            <text x="160" y="378" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">HUMAN MADE</text>
+        </g>
+        <g transform="translate(-460, -180) rotate(12)">
+            <rect width="250" height="340" rx="16" fill="#1E1E1E" stroke="#CCC" opacity="0.85"/>
+            <text x="125" y="170" text-anchor="middle" fill="#AAA" font-family="Poppins, sans-serif" font-size="12">[ GIANT PANDA • AI ]</text>
+        </g>
+        <g transform="translate(240, -180) rotate(-12)">
+            <rect width="250" height="340" rx="16" fill="#1E1E1E" stroke="#CCC" opacity="0.85"/>
+            <text x="125" y="170" text-anchor="middle" fill="#AAA" font-family="Poppins, sans-serif" font-size="12">[ HUMAN PORTRAIT ]</text>
+        </g>
+    </g>
+
+    <g transform="translate(720, 830)" text-anchor="middle">
+        <text y="0" fill="#777" font-family="Poppins, sans-serif" font-size="12" font-weight="600" letter-spacing="1">WILDLIFE PHOTOGRAPHY — FOX</text>
+        <g transform="translate(-140, 16)">
+            <rect width="280" height="38" rx="19" fill="#FFF" stroke="rgba(0,0,0,0.15)"/>
+            <circle cx="22" cy="19" r="4" fill="#10B981"/>
+            <text x="145" y="24" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="11" font-weight="700">CLICK CARD TO ZOOM &amp; INSPECT</text>
+        </g>
+    </g>
+    
+    <g id="Footer" transform="translate(0, 910)">
+        <line x1="150" y1="0" x2="1290" y2="0" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="35" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">HUMAN OR AI? — Interactive Visual Experiment</text>
+        <text x="1290" y="35" text-anchor="end" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">Interactive Design Prototype</text>
+    </g>
+    
+</svg>
+      </div>
+    </div>
+    
+    <div class="artboard-container">
+      <div class="flex items-center justify-between pb-3 border-b border-[#D5D4CE] mb-4">
+        <div>
+          <h2 class="text-base font-bold text-[#111111]">04. Results & Matrix (1440 × 1400)</h2>
+          <p class="text-xs text-[#777777]">Score, tier, perception bias & 15-round breakdown</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copySvgToClipboard('PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDE0NjAiIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjE0NjAiIGZpbGw9Im5vbmUiPgogICAgPHJlY3Qgd2lkdGg9IjE0NDAiIGhlaWdodD0iMTQ2MCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgCiAgICA8ZyBpZD0iSGVhZGVyIj4KICAgICAgICA8cmVjdCB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgICAgIDxsaW5lIHgxPSIwIiB5MT0iNjQiIHgyPSIxNDQwIiB5Mj0iNjQiIHN0cm9rZT0iI0Q5RDlENCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgPHRleHQgeD0iMTUwIiB5PSIzOCIgZmlsbD0iIzExMTExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjIiPkhVTUFOIDx0c3BhbiBmb250LWZhbWlseT0iTmV3c3JlYWRlciwgR2VvcmdpYSwgc2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzc3Nzc3NyI+T1I8L3RzcGFuPiBBST88L3RleHQ+CiAgICAgICAgCiAgICAgICAgICAgIDxyZWN0IHg9Ijk0OCIgeT0iMTgiIHdpZHRoPSI2MCIgaGVpZ2h0PSIyOCIgcng9IjE0IiBmaWxsPSIjMTExMTExIi8+CiAgICAgICAgICAgIDx0ZXh0IHg9Ijk2MCIgeT0iMzYiIGZpbGw9IiNGNUY0RUYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+SE9NRTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEwMjgiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPlRIRSBURVNUPC90ZXh0PgogICAgICAgICAgICAKICAgICAgICAgICAgPHRleHQgeD0iMTEyOCIgeT0iMzYiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+TElCUkFSWTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEyMTkiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPkFCT1VUPC90ZXh0PgogICAgICAgICAgICAKICAgICAgICAgICAgPHRleHQgeD0iMTI5MiIgeT0iMzYiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+Q09OVEFDVDwvdGV4dD4KICAgICAgICAgICAgCiAgICA8L2c+CiAgICAKCiAgICA8ZyBpZD0iUmVzdWx0cyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjYwLCA5NSkiPgogICAgICAgIDx0ZXh0IHg9IjAiIHk9IjIwIiBmaWxsPSIjMkE0MzY1IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEuNSI+UEVSQ0VQVElPTiBNQVRSSVggJmFtcDsgQU5BTFlUSUNTPC90ZXh0PgogICAgICAgIDx0ZXh0IHg9IjAiIHk9IjU1IiBmaWxsPSIjMTExIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzNCIgZm9udC13ZWlnaHQ9IjgwMCI+WU9VUiBQRVJGT1JNQU5DRSBTVU1NQVJZPC90ZXh0PgogICAgICAgIDxsaW5lIHgxPSIwIiB5MT0iNzUiIHgyPSI5MjAiIHkyPSI3NSIgc3Ryb2tlPSIjRDlEOUQ0Ii8+CgogICAgICAgIDwhLS0gU2NvcmUgSGVybyAtLT4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLCA5NSkiPgogICAgICAgICAgICA8cmVjdCB3aWR0aD0iOTIwIiBoZWlnaHQ9IjE2MCIgcng9IjIwIiBmaWxsPSIjRkZGIiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgPHRleHQgeD0iNDYwIiB5PSI3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNjQiIGZvbnQtd2VpZ2h0PSI4MDAiPjgwJTwvdGV4dD4KICAgICAgICAgICAgPHRleHQgeD0iNDYwIiB5PSIxMDIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMyQTQzNjUiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIj5PVkVSQUxMIEFDQ1VSQUNZIFNDT1JFPC90ZXh0PgogICAgICAgICAgICA8dGV4dCB4PSI0NjAiIHk9IjEyOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiPjEyIG9mIDE1IHN1YmplY3RzIGNvcnJlY3RseSBpZGVudGlmaWVkPC90ZXh0PgogICAgICAgIDwvZz4KCiAgICAgICAgPCEtLSBUaWVyICYgQmlhcyBHcmlkIC0tPgogICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsIDI4MCkiPgogICAgICAgICAgICA8cmVjdCB3aWR0aD0iNDQ1IiBoZWlnaHQ9IjI0MCIgcng9IjE4IiBmaWxsPSIjRkZGIiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgPHRleHQgeD0iMjQiIHk9IjMyIiBmaWxsPSIjMTExIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjcwMCI+QUNDVVJBQ1kgQlkgQ09NUExFWElUWSBUSUVSPC90ZXh0PgogICAgICAgICAgICA8dGV4dCB4PSIyNCIgeT0iNzUiIGZpbGw9IiMzMzMiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5CZWdpbm5lciBUaWVyPC90ZXh0PgogICAgICAgICAgICA8dGV4dCB4PSI0MjEiIHk9Ijc1IiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjMTExIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjcwMCI+MTAwJSAoNS81KTwvdGV4dD4KICAgICAgICAgICAgPHJlY3QgeD0iMjQiIHk9Ijg1IiB3aWR0aD0iMzk3IiBoZWlnaHQ9IjciIHJ4PSIzLjUiIGZpbGw9IiMxMTEiLz4KICAgICAgICAgICAgPHRleHQgeD0iMjQiIHk9IjEzMCIgZmlsbD0iIzMzMyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiPkludGVybWVkaWF0ZSBUaWVyPC90ZXh0PgogICAgICAgICAgICA8dGV4dCB4PSI0MjEiIHk9IjEzMCIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiPjgwJSAoNC81KTwvdGV4dD4KICAgICAgICAgICAgPHJlY3QgeD0iMjQiIHk9IjE0MCIgd2lkdGg9IjMxOCIgaGVpZ2h0PSI3IiByeD0iMy41IiBmaWxsPSIjMTExIi8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjI0IiB5PSIxODUiIGZpbGw9IiMzMzMiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5BZHZhbmNlZCBUaWVyPC90ZXh0PgogICAgICAgICAgICA8dGV4dCB4PSI0MjEiIHk9IjE4NSIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiPjYwJSAoMy81KTwvdGV4dD4KICAgICAgICAgICAgPHJlY3QgeD0iMjQiIHk9IjE5NSIgd2lkdGg9IjIzOCIgaGVpZ2h0PSI3IiByeD0iMy41IiBmaWxsPSIjMTExIi8+CgogICAgICAgICAgICA8IS0tIFJpZ2h0OiBCaWFzIC0tPgogICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0NzUsIDApIj4KICAgICAgICAgICAgICAgIDxyZWN0IHdpZHRoPSI0NDUiIGhlaWdodD0iMjQwIiByeD0iMTgiIGZpbGw9IiNGRkYiIHN0cm9rZT0iI0Q5RDlENCIvPgogICAgICAgICAgICAgICAgPHRleHQgeD0iMjQiIHk9IjMyIiBmaWxsPSIjMTExIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjcwMCI+QVVUSE9SU0hJUCBQRVJDRVBUSU9OIEJJQVM8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIyNCIgeT0iNzUiIGZpbGw9IiMzMzMiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5IdW1hbiBDcmFmdCBSZWNvZ25pdGlvbjwvdGV4dD4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjQyMSIgeT0iNzUiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiMxMEI5ODEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIj44MyU8L3RleHQ+CiAgICAgICAgICAgICAgICA8cmVjdCB4PSIyNCIgeT0iODUiIHdpZHRoPSIzMzAiIGhlaWdodD0iNyIgcng9IjMuNSIgZmlsbD0iIzEwQjk4MSIvPgogICAgICAgICAgICAgICAgPHRleHQgeD0iMjQiIHk9IjEzMCIgZmlsbD0iIzMzMyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiPkFJIFN5bnRoZXNpcyBEZXRlY3Rpb248L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSI0MjEiIHk9IjEzMCIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzNCODJGNiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiPjc4JTwvdGV4dD4KICAgICAgICAgICAgICAgIDxyZWN0IHg9IjI0IiB5PSIxNDAiIHdpZHRoPSIzMTAiIGhlaWdodD0iNyIgcng9IjMuNSIgZmlsbD0iIzNCODJGNiIvPgogICAgICAgICAgICAgICAgPHJlY3QgeD0iMjQiIHk9IjE3MCIgd2lkdGg9IjM5NyIgaGVpZ2h0PSI1MiIgcng9IjEwIiBmaWxsPSIjRkFGOUY2IiBzdHJva2U9IiNFQ0VCRTYiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjM2IiB5PSIxOTQiIGZpbGw9IiM0NDQiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIj5TdHJvbmcgZGlzY2Vybm1lbnQgb2Ygb3JnYW5pYyBvcHRpY2FsIHZpZ25ldHRpbmcgYW5kIG5hdHVyYWwgZmFsbG9mZi48L3RleHQ+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CgogICAgICAgIDwhLS0gUm91bmQtQnktUm91bmQgQnJlYWtkb3duIChGcm9tIFppcCBGaWxlKSAtLT4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLCA1NDUpIj4KICAgICAgICAgICAgPHJlY3Qgd2lkdGg9IjkyMCIgaGVpZ2h0PSIzNDAiIHJ4PSIxOCIgZmlsbD0iI0ZGRiIgc3Ryb2tlPSIjRDlEOUQ0Ii8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjI0IiB5PSIzMiIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiPlJPVU5ELUJZLVJPVU5EIEJSRUFLRE9XTiAoQUxMIDE1IFNVQkpFQ1RTKTwvdGV4dD4KICAgICAgICAgICAgPGxpbmUgeDE9IjI0IiB5MT0iNDYiIHgyPSI4OTYiIHkyPSI0NiIgc3Ryb2tlPSIjRjBFRkVBIi8+CgogICAgICAgICAgICA8IS0tIDE1IFJvdW5kcyBHcmlkIE1vY2sgLS0+CiAgICAgICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI0LCA2MCkiPgogICAgICAgICAgICAgICAgPCEtLSBSb3cgMSAtLT4KICAgICAgICAgICAgICAgIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iNzIiIHJ4PSIxMCIgZmlsbD0iI0Y1RjRFRiIgc3Ryb2tlPSIjRDlEOUQ0Ii8+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIxMiIgeT0iMjQiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIj5ST1VORCAxIOKAoiBGT1g8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIyNjgiIHk9IjI0IiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjMTBCOTgxIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjcwMCI+Q09SUkVDVDwvdGV4dD4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjEyIiB5PSI0NCIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiPkhVTUFOIE1BREU8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIxMiIgeT0iNjAiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIj5Zb3VyIGd1ZXNzOiBIdW1hbjwvdGV4dD4KCiAgICAgICAgICAgICAgICA8cmVjdCB4PSIyOTUiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iNzIiIHJ4PSIxMCIgZmlsbD0iI0Y1RjRFRiIgc3Ryb2tlPSIjRDlEOUQ0Ii8+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIzMDciIHk9IjI0IiBmaWxsPSIjNzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCI+Uk9VTkQgMiDigKIgUEFOREE8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSI1NjMiIHk9IjI0IiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjMTBCOTgxIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjcwMCI+Q09SUkVDVDwvdGV4dD4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjMwNyIgeT0iNDQiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5BSSBHRU5FUkFURUQ8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIzMDciIHk9IjYwIiBmaWxsPSIjNzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCI+WW91ciBndWVzczogQUk8L3RleHQ+CgogICAgICAgICAgICAgICAgPHJlY3QgeD0iNTkwIiB5PSIwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjcyIiByeD0iMTAiIGZpbGw9IiNGNUY0RUYiIHN0cm9rZT0iI0Q5RDlENCIvPgogICAgICAgICAgICAgICAgPHRleHQgeD0iNjAyIiB5PSIyNCIgZmlsbD0iIzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiPlJPVU5EIDMg4oCiIEFJIFBPUlRSQUlUPC90ZXh0PgogICAgICAgICAgICAgICAgPHRleHQgeD0iODU4IiB5PSIyNCIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iI0M1MjIxRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiPk1JU1NFRDwvdGV4dD4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjYwMiIgeT0iNDQiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5BSSBHRU5FUkFURUQ8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSI2MDIiIHk9IjYwIiBmaWxsPSIjNzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCI+WW91ciBndWVzczogSHVtYW48L3RleHQ+CgogICAgICAgICAgICAgICAgPCEtLSBSb3cgMiAtLT4KICAgICAgICAgICAgICAgIDxyZWN0IHg9IjAiIHk9Ijg1IiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjcyIiByeD0iMTAiIGZpbGw9IiNGNUY0RUYiIHN0cm9rZT0iI0Q5RDlENCIvPgogICAgICAgICAgICAgICAgPHRleHQgeD0iMTIiIHk9IjEwOSIgZmlsbD0iIzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiPlJPVU5EIDQg4oCiIEhVTUFOIFBPUlRSQUlUPC90ZXh0PgogICAgICAgICAgICAgICAgPHRleHQgeD0iMjY4IiB5PSIxMDkiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiMxMEI5ODEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNzAwIj5DT1JSRUNUPC90ZXh0PgogICAgICAgICAgICAgICAgPHRleHQgeD0iMTIiIHk9IjEyOSIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiPkhVTUFOIE1BREU8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIxMiIgeT0iMTQ1IiBmaWxsPSIjNzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCI+WW91ciBndWVzczogSHVtYW48L3RleHQ+CgogICAgICAgICAgICAgICAgPHJlY3QgeD0iMjk1IiB5PSI4NSIgd2lkdGg9IjI4MCIgaGVpZ2h0PSI3MiIgcng9IjEwIiBmaWxsPSIjRjVGNEVGIiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjMwNyIgeT0iMTA5IiBmaWxsPSIjNzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCI+Uk9VTkQgNSDigKIgU1RJTEwgTElGRTwvdGV4dD4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjU2MyIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjMTBCOTgxIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjcwMCI+Q09SUkVDVDwvdGV4dD4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjMwNyIgeT0iMTI5IiBmaWxsPSIjMTExIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjYwMCI+QUkgR0VORVJBVEVEPC90ZXh0PgogICAgICAgICAgICAgICAgPHRleHQgeD0iMzA3IiB5PSIxNDUiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIj5Zb3VyIGd1ZXNzOiBBSTwvdGV4dD4KCiAgICAgICAgICAgICAgICA8cmVjdCB4PSI1OTAiIHk9Ijg1IiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjcyIiByeD0iMTAiIGZpbGw9IiNGNUY0RUYiIHN0cm9rZT0iI0Q5RDlENCIvPgogICAgICAgICAgICAgICAgPHRleHQgeD0iNjAyIiB5PSIxMDkiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIj5ST1VORCA2IOKAoiBPSUwgUEFJTlRJTkc8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSI4NTgiIHk9IjEwOSIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzEwQjk4MSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI3MDAiPkNPUlJFQ1Q8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSI2MDIiIHk9IjEyOSIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiPkhVTUFOIE1BREU8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSI2MDIiIHk9IjE0NSIgZmlsbD0iIzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiPllvdXIgZ3Vlc3M6IEh1bWFuPC90ZXh0PgoKICAgICAgICAgICAgICAgIDwhLS0gTW9yZSBpbmRpY2F0b3IgLS0+CiAgICAgICAgICAgICAgICA8cmVjdCB4PSIwIiB5PSIxNzAiIHdpZHRoPSI4NzAiIGhlaWdodD0iODUiIHJ4PSIxMCIgZmlsbD0iI0ZBRjlGNiIgc3Ryb2tlPSIjRUNFQkU2Ii8+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSI0MzUiIHk9IjIwNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiPlJvdW5kcyA3IHRocm91Z2ggMTU6IExha2UsIEFyY2hpdGVjdHVyZSwgTGlvbnMsIFBlcmZ1bWUsIENhciwgRGVuaW0sIENhdDwvdGV4dD4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjQzNSIgeT0iMjMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+SW50ZXJtZWRpYXRlICZhbXA7IEFkdmFuY2VkIFRpZXJzIOKAoiBGdWxsIFJlc3VsdHMgTG9nZ2VkPC90ZXh0PgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgoKICAgICAgICA8IS0tIFF1b3RlIENhcmQgLS0+CiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwgOTEwKSI+CiAgICAgICAgICAgIDxyZWN0IHdpZHRoPSI5MjAiIGhlaWdodD0iMTQwIiByeD0iMTgiIGZpbGw9IiMxMTEiLz4KICAgICAgICAgICAgPHRleHQgeD0iMjgiIHk9IjMyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNSkiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI3MDAiPkVYUEVSSU1FTlRBTCBTVU1NQVJZPC90ZXh0PgogICAgICAgICAgICA8dGV4dCB4PSIyOCIgeT0iNjgiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJOZXdzcmVhZGVyLCBzZXJpZiIgZm9udC1zdHlsZT0iaXRhbGljIiBmb250LXNpemU9IjIyIj7igJxTb21ldGltZXMgd2UgcmVzcG9uZCB0byB0aGUgd29yayBiZWZvcmUgd2Uga25vdyB3aG8gbWFkZSBpdC7igJ08L3RleHQ+CiAgICAgICAgICAgIDx0ZXh0IHg9IjI4IiB5PSIxMDIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC43KSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiPlRoaXMgZXhwZXJpbWVudCBleHBsb3JlcyBob3cgYXV0aG9yc2hpcCwgdmlzdWFsIHF1YWxpdHksIG1pY3JvLWRldGFpbHMsIHRleHR1cmUgZ3JhaW4sIGFuZCBwZXJjZWl2ZWQgZWZmb3J0IHNoYXBlIGF1ZGllbmNlIHJlc3BvbnNlLjwvdGV4dD4KICAgICAgICA8L2c+CgogICAgICAgIDwhLS0gQnV0dG9ucyAtLT4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMTAsIDEwNzUpIj4KICAgICAgICAgICAgPHJlY3Qgd2lkdGg9IjIzMCIgaGVpZ2h0PSI0OCIgcng9IjI0IiBmaWxsPSIjMTExIi8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjExNSIgeT0iMjkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIj5SRVRBS0UgMTUtUk9VTkQgVEVTVCDihro8L3RleHQ+CiAgICAgICAgICAgIDxyZWN0IHg9IjI1MCIgd2lkdGg9IjI0MCIgaGVpZ2h0PSI0OCIgcng9IjI0IiBmaWxsPSIjRkZGIiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgPHRleHQgeD0iMzcwIiB5PSIyOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiPkJST1dTRSBJTUFHRSBMSUJSQVJZIOKGlzwvdGV4dD4KICAgICAgICA8L2c+CiAgICA8L2c+CgogICAgCiAgICA8ZyBpZD0iRm9vdGVyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLCAxMzgwKSI+CiAgICAgICAgPGxpbmUgeDE9IjE1MCIgeTE9IjAiIHgyPSIxMjkwIiB5Mj0iMCIgc3Ryb2tlPSIjRDlEOUQ0IiBzdHJva2Utd2lkdGg9IjEiLz4KICAgICAgICA8dGV4dCB4PSIxNTAiIHk9IjM1IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjQwMCI+SFVNQU4gT1IgQUk/IOKAlCBJbnRlcmFjdGl2ZSBWaXN1YWwgRXhwZXJpbWVudDwvdGV4dD4KICAgICAgICA8dGV4dCB4PSIxMjkwIiB5PSIzNSIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzc3Nzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI0MDAiPkludGVyYWN0aXZlIERlc2lnbiBQcm90b3R5cGU8L3RleHQ+CiAgICA8L2c+CiAgICAKPC9zdmc+', '04. Results & Matrix (1440 × 1400)')" class="bg-[#111111] hover:bg-[#2A4365] text-white text-xs font-semibold px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            Copy for Figma (Ctrl+V)
+          </button>
+          <a href="/figma-export/04_results_stats.svg" download="04_results_stats.svg" class="bg-white border border-[#D9D9D4] hover:bg-gray-50 text-[#111] text-xs font-medium px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Download SVG
+          </a>
+        </div>
+      </div>
+      <div class="svg-canvas">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1460" width="1440" height="1460" fill="none">
+    <rect width="1440" height="1460" fill="#F5F4EF"/>
+    
+    <g id="Header">
+        <rect width="1440" height="64" fill="#F5F4EF"/>
+        <line x1="0" y1="64" x2="1440" y2="64" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="38" fill="#111111" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">HUMAN <tspan font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="400" fill="#777777">OR</tspan> AI?</text>
+        
+            <rect x="948" y="18" width="60" height="28" rx="14" fill="#111111"/>
+            <text x="960" y="36" fill="#F5F4EF" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">HOME</text>
+            
+            <text x="1028" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">THE TEST</text>
+            
+            <text x="1128" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">LIBRARY</text>
+            
+            <text x="1219" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">ABOUT</text>
+            
+            <text x="1292" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">CONTACT</text>
+            
+    </g>
+    
+
+    <g id="Results" transform="translate(260, 95)">
+        <text x="0" y="20" fill="#2A4365" font-family="Poppins, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">PERCEPTION MATRIX &amp; ANALYTICS</text>
+        <text x="0" y="55" fill="#111" font-family="Poppins, sans-serif" font-size="34" font-weight="800">YOUR PERFORMANCE SUMMARY</text>
+        <line x1="0" y1="75" x2="920" y2="75" stroke="#D9D9D4"/>
+
+        <!-- Score Hero -->
+        <g transform="translate(0, 95)">
+            <rect width="920" height="160" rx="20" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="460" y="70" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="64" font-weight="800">80%</text>
+            <text x="460" y="102" text-anchor="middle" fill="#2A4365" font-family="Poppins, sans-serif" font-size="12" font-weight="700">OVERALL ACCURACY SCORE</text>
+            <text x="460" y="128" text-anchor="middle" fill="#777" font-family="Poppins, sans-serif" font-size="14">12 of 15 subjects correctly identified</text>
+        </g>
+
+        <!-- Tier & Bias Grid -->
+        <g transform="translate(0, 280)">
+            <rect width="445" height="240" rx="18" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="24" y="32" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">ACCURACY BY COMPLEXITY TIER</text>
+            <text x="24" y="75" fill="#333" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Beginner Tier</text>
+            <text x="421" y="75" text-anchor="end" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">100% (5/5)</text>
+            <rect x="24" y="85" width="397" height="7" rx="3.5" fill="#111"/>
+            <text x="24" y="130" fill="#333" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Intermediate Tier</text>
+            <text x="421" y="130" text-anchor="end" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">80% (4/5)</text>
+            <rect x="24" y="140" width="318" height="7" rx="3.5" fill="#111"/>
+            <text x="24" y="185" fill="#333" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Advanced Tier</text>
+            <text x="421" y="185" text-anchor="end" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">60% (3/5)</text>
+            <rect x="24" y="195" width="238" height="7" rx="3.5" fill="#111"/>
+
+            <!-- Right: Bias -->
+            <g transform="translate(475, 0)">
+                <rect width="445" height="240" rx="18" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="24" y="32" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">AUTHORSHIP PERCEPTION BIAS</text>
+                <text x="24" y="75" fill="#333" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Human Craft Recognition</text>
+                <text x="421" y="75" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="12" font-weight="700">83%</text>
+                <rect x="24" y="85" width="330" height="7" rx="3.5" fill="#10B981"/>
+                <text x="24" y="130" fill="#333" font-family="Poppins, sans-serif" font-size="12" font-weight="600">AI Synthesis Detection</text>
+                <text x="421" y="130" text-anchor="end" fill="#3B82F6" font-family="Poppins, sans-serif" font-size="12" font-weight="700">78%</text>
+                <rect x="24" y="140" width="310" height="7" rx="3.5" fill="#3B82F6"/>
+                <rect x="24" y="170" width="397" height="52" rx="10" fill="#FAF9F6" stroke="#ECEBE6"/>
+                <text x="36" y="194" fill="#444" font-family="Poppins, sans-serif" font-size="11">Strong discernment of organic optical vignetting and natural falloff.</text>
+            </g>
+        </g>
+
+        <!-- Round-By-Round Breakdown (From Zip File) -->
+        <g transform="translate(0, 545)">
+            <rect width="920" height="340" rx="18" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="24" y="32" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">ROUND-BY-ROUND BREAKDOWN (ALL 15 SUBJECTS)</text>
+            <line x1="24" y1="46" x2="896" y2="46" stroke="#F0EFEA"/>
+
+            <!-- 15 Rounds Grid Mock -->
+            <g transform="translate(24, 60)">
+                <!-- Row 1 -->
+                <rect x="0" y="0" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="12" y="24" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 1 • FOX</text>
+                <text x="268" y="24" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="10" font-weight="700">CORRECT</text>
+                <text x="12" y="44" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">HUMAN MADE</text>
+                <text x="12" y="60" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: Human</text>
+
+                <rect x="295" y="0" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="307" y="24" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 2 • PANDA</text>
+                <text x="563" y="24" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="10" font-weight="700">CORRECT</text>
+                <text x="307" y="44" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">AI GENERATED</text>
+                <text x="307" y="60" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: AI</text>
+
+                <rect x="590" y="0" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="602" y="24" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 3 • AI PORTRAIT</text>
+                <text x="858" y="24" text-anchor="end" fill="#C5221F" font-family="Poppins, sans-serif" font-size="10" font-weight="700">MISSED</text>
+                <text x="602" y="44" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">AI GENERATED</text>
+                <text x="602" y="60" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: Human</text>
+
+                <!-- Row 2 -->
+                <rect x="0" y="85" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="12" y="109" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 4 • HUMAN PORTRAIT</text>
+                <text x="268" y="109" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="10" font-weight="700">CORRECT</text>
+                <text x="12" y="129" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">HUMAN MADE</text>
+                <text x="12" y="145" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: Human</text>
+
+                <rect x="295" y="85" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="307" y="109" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 5 • STILL LIFE</text>
+                <text x="563" y="109" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="10" font-weight="700">CORRECT</text>
+                <text x="307" y="129" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">AI GENERATED</text>
+                <text x="307" y="145" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: AI</text>
+
+                <rect x="590" y="85" width="280" height="72" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="602" y="109" fill="#777" font-family="Poppins, sans-serif" font-size="10">ROUND 6 • OIL PAINTING</text>
+                <text x="858" y="109" text-anchor="end" fill="#10B981" font-family="Poppins, sans-serif" font-size="10" font-weight="700">CORRECT</text>
+                <text x="602" y="129" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">HUMAN MADE</text>
+                <text x="602" y="145" fill="#777" font-family="Poppins, sans-serif" font-size="10">Your guess: Human</text>
+
+                <!-- More indicator -->
+                <rect x="0" y="170" width="870" height="85" rx="10" fill="#FAF9F6" stroke="#ECEBE6"/>
+                <text x="435" y="205" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Rounds 7 through 15: Lake, Architecture, Lions, Perfume, Car, Denim, Cat</text>
+                <text x="435" y="230" text-anchor="middle" fill="#777" font-family="Poppins, sans-serif" font-size="11">Intermediate &amp; Advanced Tiers • Full Results Logged</text>
+            </g>
+        </g>
+
+        <!-- Quote Card -->
+        <g transform="translate(0, 910)">
+            <rect width="920" height="140" rx="18" fill="#111"/>
+            <text x="28" y="32" fill="rgba(255,255,255,0.5)" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">EXPERIMENTAL SUMMARY</text>
+            <text x="28" y="68" fill="#FFF" font-family="Newsreader, serif" font-style="italic" font-size="22">“Sometimes we respond to the work before we know who made it.”</text>
+            <text x="28" y="102" fill="rgba(255,255,255,0.7)" font-family="Poppins, sans-serif" font-size="12">This experiment explores how authorship, visual quality, micro-details, texture grain, and perceived effort shape audience response.</text>
+        </g>
+
+        <!-- Buttons -->
+        <g transform="translate(210, 1075)">
+            <rect width="230" height="48" rx="24" fill="#111"/>
+            <text x="115" y="29" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="12" font-weight="700">RETAKE 15-ROUND TEST ↺</text>
+            <rect x="250" width="240" height="48" rx="24" fill="#FFF" stroke="#D9D9D4"/>
+            <text x="370" y="29" text-anchor="middle" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">BROWSE IMAGE LIBRARY ↗</text>
+        </g>
+    </g>
+
+    
+    <g id="Footer" transform="translate(0, 1380)">
+        <line x1="150" y1="0" x2="1290" y2="0" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="35" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">HUMAN OR AI? — Interactive Visual Experiment</text>
+        <text x="1290" y="35" text-anchor="end" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">Interactive Design Prototype</text>
+    </g>
+    
+</svg>
+      </div>
+    </div>
+    
+    <div class="artboard-container">
+      <div class="flex items-center justify-between pb-3 border-b border-[#D5D4CE] mb-4">
+        <div>
+          <h2 class="text-base font-bold text-[#111111]">05. About / The Study (1440 × 980)</h2>
+          <p class="text-xs text-[#777777]">Infinite spiral 3D column + study statement</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copySvgToClipboard('PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDk4MCIgd2lkdGg9IjE0NDAiIGhlaWdodD0iOTgwIiBmaWxsPSJub25lIj4KICAgIDxyZWN0IHdpZHRoPSIxNDQwIiBoZWlnaHQ9Ijk4MCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgCiAgICA8ZyBpZD0iSGVhZGVyIj4KICAgICAgICA8cmVjdCB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgICAgIDxsaW5lIHgxPSIwIiB5MT0iNjQiIHgyPSIxNDQwIiB5Mj0iNjQiIHN0cm9rZT0iI0Q5RDlENCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgPHRleHQgeD0iMTUwIiB5PSIzOCIgZmlsbD0iIzExMTExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjIiPkhVTUFOIDx0c3BhbiBmb250LWZhbWlseT0iTmV3c3JlYWRlciwgR2VvcmdpYSwgc2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzc3Nzc3NyI+T1I8L3RzcGFuPiBBST88L3RleHQ+CiAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9Ijk2MCIgeT0iMzYiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+SE9NRTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEwMjQiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPlRIRSBURVNUPC90ZXh0PgogICAgICAgICAgICAKICAgICAgICAgICAgPHRleHQgeD0iMTEyNCIgeT0iMzYiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+TElCUkFSWTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDxyZWN0IHg9IjEyMDMiIHk9IjE4IiB3aWR0aD0iNjkiIGhlaWdodD0iMjgiIHJ4PSIxNCIgZmlsbD0iIzExMTExMSIvPgogICAgICAgICAgICA8dGV4dCB4PSIxMjE1IiB5PSIzNiIgZmlsbD0iI0Y1RjRFRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI2MDAiIGxldHRlci1zcGFjaW5nPSIxIj5BQk9VVDwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEyOTIiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPkNPTlRBQ1Q8L3RleHQ+CiAgICAgICAgICAgIAogICAgPC9nPgogICAgCgogICAgPCEtLSBBQk9VVCBTQ1JFRU4gKElORklOSVRFIFNQSVJBTCBPTiBMRUZUICsgVEVYVCBDT05URU5UIE9OIFJJR0hUKSAtLT4KICAgIDxnIGlkPSJBYm91dC1MYXlvdXQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE1MCwgMTEwKSI+CiAgICAgICAgCiAgICAgICAgPCEtLSBMRUZUOiBJTkZJTklURSBTUElSQUwgM0QgQ09MVU1OIC0tPgogICAgICAgIDxnIGlkPSJJbmZpbml0ZVNwaXJhbC1Db2x1bW4iIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsIDApIj4KICAgICAgICAgICAgPCEtLSBPdXRlciBTcGlyYWwgQ29udGFpbmVyIFRyYWNrIC0tPgogICAgICAgICAgICA8cmVjdCB3aWR0aD0iMzgwIiBoZWlnaHQ9Ijc0MCIgcng9IjIwIiBmaWxsPSIjRUNFQkU2IiBmaWxsLW9wYWNpdHk9IjAuNSIgc3Ryb2tlPSIjRDlEOUQ0Ii8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjE5MCIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+SU5GSU5JVEUgU1BJUkFMIENZTElOREVSPC90ZXh0PgoKICAgICAgICAgICAgPCEtLSBDYXJkIFN0YWNrIGFsb25nIFNwaXJhbCAtLT4KICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTkwLCAzNzApIj4KICAgICAgICAgICAgICAgIDwhLS0gVG9wIENhcmQgLS0+CiAgICAgICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNjAsIC0yMjApIHJvdGF0ZSgtMTQpIHNjYWxlKDAuODUpIj4KICAgICAgICAgICAgICAgICAgICA8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcng9IjE0IiBmaWxsPSIjMjIyIiBzdHJva2U9IiNGRkYiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjYwIiB5PSI2NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0ZGRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPkRlc2VydCBMaWdodDwvdGV4dD4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgIDwhLS0gVXBwZXIgQ2FyZCAtLT4KICAgICAgICAgICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLCAtMTQwKSByb3RhdGUoMTApIHNjYWxlKDAuOTUpIj4KICAgICAgICAgICAgICAgICAgICA8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcng9IjE0IiBmaWxsPSIjMkUyRTJFIiBzdHJva2U9IiNGRkYiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjYwIiB5PSI2NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0ZGRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPkdyZWVuIE1lYWRvdzwvdGV4dD4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgIDwhLS0gQ2VudGVyIFpvb20gRm9jdXMgQ2FyZCAtLT4KICAgICAgICAgICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03MCwgLTQwKSBzY2FsZSgxLjIpIj4KICAgICAgICAgICAgICAgICAgICA8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcng9IjE0IiBmaWxsPSIjMTExIiBzdHJva2U9IiMyQTQzNjUiIHN0cm9rZS13aWR0aD0iMyIgZmlsdGVyPSJkcm9wLXNoYWRvdygwIDE1cHggMzBweCByZ2JhKDAsMCwwLDAuMjUpKSIvPgogICAgICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjYwIiB5PSI2NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0ZGRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiPk1vdW50YWluIExha2U8L3RleHQ+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8IS0tIExvd2VyIENhcmQgLS0+CiAgICAgICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMCwgODApIHJvdGF0ZSgtOCkgc2NhbGUoMS4wKSI+CiAgICAgICAgICAgICAgICAgICAgPHJlY3Qgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxNCIgZmlsbD0iIzI1MjUyNSIgc3Ryb2tlPSIjRkZGIiBzdHJva2Utd2lkdGg9IjIiLz4KICAgICAgICAgICAgICAgICAgICA8dGV4dCB4PSI2MCIgeT0iNjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIj5Gb3Jlc3QgUGF0aDwvdGV4dD4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgIDwhLS0gQm90dG9tIENhcmQgLS0+CiAgICAgICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTAsIDE5MCkgcm90YXRlKDEyKSBzY2FsZSgwLjg1KSI+CiAgICAgICAgICAgICAgICAgICAgPHJlY3Qgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxNCIgZmlsbD0iIzFDMUMxQyIgc3Ryb2tlPSIjRkZGIiBzdHJva2Utd2lkdGg9IjIiLz4KICAgICAgICAgICAgICAgICAgICA8dGV4dCB4PSI2MCIgeT0iNjUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkYiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIj5Sb2NreSBTdW1taXQ8L3RleHQ+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPHRleHQgeD0iMTkwIiB5PSI3MTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTkiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIj5BdXRvLVJvdGF0aW5nIDNEIFZlcnRpY2FsIEN5bGluZGVyPC90ZXh0PgogICAgICAgIDwvZz4KCiAgICAgICAgPCEtLSBSSUdIVDogRURJVE9SSUFMIEhFQURMSU5FICYgUEFSQUdSQVBIIChGUk9NIFVTRVInUyBaSVApIC0tPgogICAgICAgIDxnIGlkPSJFZGl0b3JpYWwtQ29udGVudCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDMwLCA4MCkiPgogICAgICAgICAgICA8dGV4dCB4PSIwIiB5PSIwIiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMS41IiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMiI+QUJPVVQgVEhFIEVYUEVSSU1FTlQ8L3RleHQ+CiAgICAgICAgICAgIAogICAgICAgICAgICA8IS0tIDMtTGluZSBIZWFkaW5nIC0tPgogICAgICAgICAgICA8dGV4dCB4PSIwIiB5PSI1MCIgZmlsbD0iIzExMTExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI4MDAiIGxpbmUtaGVpZ2h0PSIxLjIiPkZyb20gSHVtYW4tTWFkZSB0byBBSS1HZW5lcmF0ZWQ6PC90ZXh0PgogICAgICAgICAgICA8dGV4dCB4PSIwIiB5PSI5MiIgZmlsbD0iIzExMTExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI4MDAiPkV4cGxvcmluZyBIb3cgQ3JlYXRpdmUgQ29udGVudDwvdGV4dD4KICAgICAgICAgICAgPHRleHQgeD0iMCIgeT0iMTM0IiBmaWxsPSIjMTExMTExIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzNCIgZm9udC13ZWlnaHQ9IjgwMCI+SW5mbHVlbmNlcyBBdWRpZW5jZSBQZXJjZXB0aW9uLjwvdGV4dD4KCiAgICAgICAgICAgIDwhLS0gQ29tYmluZWQgUGFyYWdyYXBoIC0tPgogICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLCAxODApIj4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjAiIHk9IjAiIGZpbGw9IiM0NDQiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0LjUiIGxpbmUtaGVpZ2h0PSIxLjciPgogICAgICAgICAgICAgICAgICAgIDx0c3BhbiB4PSIwIiBkeT0iMCI+SW4gYW4gZXJhIHdoZXJlIG1hY2hpbmUgc3ludGhlc2lzIGFjaGlldmVzIHBob3RvcmVhbGlzdGljIHByZWNpc2lvbiw8L3RzcGFuPgogICAgICAgICAgICAgICAgICAgIDx0c3BhbiB4PSIwIiBkeT0iMjgiPnRoaXMgZXhwZXJpbWVudCB3YXMgZGVzaWduZWQgdG8gaW52ZXN0aWdhdGUgd2hldGhlciBodW1hbiBhdWRpZW5jZXM8L3RzcGFuPgogICAgICAgICAgICAgICAgICAgIDx0c3BhbiB4PSIwIiBkeT0iMjgiPmNhbiBpbnR1aXRpdmVseSBkaXNjZXJuIHBoeXNpY2FsIGNyYWZ0c21hbnNoaXAgZnJvbSBnZW5lcmF0aXZlIGFsZ29yaXRobXM8L3RzcGFuPgogICAgICAgICAgICAgICAgICAgIDx0c3BhbiB4PSIwIiBkeT0iMjgiPndoZW4gYWxsIGNyZWF0b3IgbWV0YWRhdGEsIHByb21wdHMsIGFuZCBwcm92ZW5hbmNlIHRhZ3MgYXJlIHN0cmlwcGVkIGF3YXkuPC90c3Bhbj4KICAgICAgICAgICAgICAgICAgICA8dHNwYW4geD0iMCIgZHk9IjM4Ij5UaHJvdWdoIDE1IG1hdGNoZWQgc3ViamVjdHMgc3Bhbm5pbmcgYmVnaW5uZXIgd2lsZGxpZmUgcGhvdG9ncmFwaHksPC90c3Bhbj4KICAgICAgICAgICAgICAgICAgICA8dHNwYW4geD0iMCIgZHk9IjI4Ij5pbnRlcm1lZGlhdGUgZmluZS1hcnQgb2lsIGdsYXppbmcsIGFuZCBhZHZhbmNlZCBjb21tZXJjaWFsIGNhdXN0aWNzLDwvdHNwYW4+CiAgICAgICAgICAgICAgICAgICAgPHRzcGFuIHg9IjAiIGR5PSIyOCI+cGFydGljaXBhbnRzIHVuY292ZXIgdGhlIHN1YnRsZSBwc3ljaG9sb2dpY2FsIGhldXJpc3RpY3PigJRmcm9tIHBlcmNlaXZlZDwvdHNwYW4+CiAgICAgICAgICAgICAgICAgICAgPHRzcGFuIHg9IjAiIGR5PSIyOCI+ZWZmb3J0IHRvIHRleHR1cmUgZ3JhaW7igJR0aGF0IHRydWx5IGdvdmVybiBhZXN0aGV0aWMgdmFsdWUuPC90c3Bhbj4KICAgICAgICAgICAgICAgIDwvdGV4dD4KICAgICAgICAgICAgPC9nPgoKICAgICAgICAgICAgPCEtLSBGZWF0dXJlIFBvaW50cyBHcmlkIC0tPgogICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLCA0MzApIj4KICAgICAgICAgICAgICAgIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIzMjAiIGhlaWdodD0iOTAiIHJ4PSIxNCIgZmlsbD0iI0ZGRiIgc3Ryb2tlPSIjRDlEOUQ0Ii8+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIxOCIgeT0iMjgiIGZpbGw9IiMyQTQzNjUiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI3MDAiPjAxIC8gQkxJTkQgT0JTRVJWQVRJT048L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIxOCIgeT0iNTIiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNjAwIj5aZXJvIE1ldGFkYXRhIEJpYXM8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIxOCIgeT0iNzAiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIj5FdmFsdWF0ZWQgcHVyZWx5IG9uIHZpc3VhbCBwaXhlbHMuPC90ZXh0PgoKICAgICAgICAgICAgICAgIDxyZWN0IHg9IjM0MCIgeT0iMCIgd2lkdGg9IjMyMCIgaGVpZ2h0PSI5MCIgcng9IjE0IiBmaWxsPSIjRkZGIiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjM1OCIgeT0iMjgiIGZpbGw9IiMyQTQzNjUiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwLjUiIGZvbnQtd2VpZ2h0PSI3MDAiPjAyIC8gMyBDQUxJQlJBVEVEIFRJRVJTPC90ZXh0PgogICAgICAgICAgICAgICAgPHRleHQgeD0iMzU4IiB5PSI1MiIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI2MDAiPkJlZ2lubmVyIHRvIEFkdmFuY2VkPC90ZXh0PgogICAgICAgICAgICAgICAgPHRleHQgeD0iMzU4IiB5PSI3MCIgZmlsbD0iIzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPlByb2dyZXNzaXZlIHBlcmNlcHR1YWwgY29tcGxleGl0eS48L3RleHQ+CiAgICAgICAgICAgIDwvZz4KCiAgICAgICAgICAgIDwhLS0gQ1RBIC0tPgogICAgICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLCA1NjApIj4KICAgICAgICAgICAgICAgIDxyZWN0IHdpZHRoPSIyMjAiIGhlaWdodD0iNDgiIHJ4PSIyNCIgZmlsbD0iIzExMSIvPgogICAgICAgICAgICAgICAgPHRleHQgeD0iMTEwIiB5PSIyOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0ZGRiIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiPlNUQVJUIFRIRSBURVNUIOKGkjwvdGV4dD4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KCiAgICAKICAgIDxnIGlkPSJGb290ZXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsIDkxMCkiPgogICAgICAgIDxsaW5lIHgxPSIxNTAiIHkxPSIwIiB4Mj0iMTI5MCIgeTI9IjAiIHN0cm9rZT0iI0Q5RDlENCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgPHRleHQgeD0iMTUwIiB5PSIzNSIgZmlsbD0iIzc3Nzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI0MDAiPkhVTUFOIE9SIEFJPyDigJQgSW50ZXJhY3RpdmUgVmlzdWFsIEV4cGVyaW1lbnQ8L3RleHQ+CiAgICAgICAgPHRleHQgeD0iMTI5MCIgeT0iMzUiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNDAwIj5JbnRlcmFjdGl2ZSBEZXNpZ24gUHJvdG90eXBlPC90ZXh0PgogICAgPC9nPgogICAgCjwvc3ZnPg==', '05. About / The Study (1440 × 980)')" class="bg-[#111111] hover:bg-[#2A4365] text-white text-xs font-semibold px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            Copy for Figma (Ctrl+V)
+          </button>
+          <a href="/figma-export/05_about_study.svg" download="05_about_study.svg" class="bg-white border border-[#D9D9D4] hover:bg-gray-50 text-[#111] text-xs font-medium px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Download SVG
+          </a>
+        </div>
+      </div>
+      <div class="svg-canvas">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 980" width="1440" height="980" fill="none">
+    <rect width="1440" height="980" fill="#F5F4EF"/>
+    
+    <g id="Header">
+        <rect width="1440" height="64" fill="#F5F4EF"/>
+        <line x1="0" y1="64" x2="1440" y2="64" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="38" fill="#111111" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">HUMAN <tspan font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="400" fill="#777777">OR</tspan> AI?</text>
+        
+            <text x="960" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">HOME</text>
+            
+            <text x="1024" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">THE TEST</text>
+            
+            <text x="1124" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">LIBRARY</text>
+            
+            <rect x="1203" y="18" width="69" height="28" rx="14" fill="#111111"/>
+            <text x="1215" y="36" fill="#F5F4EF" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">ABOUT</text>
+            
+            <text x="1292" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">CONTACT</text>
+            
+    </g>
+    
+
+    <!-- ABOUT SCREEN (INFINITE SPIRAL ON LEFT + TEXT CONTENT ON RIGHT) -->
+    <g id="About-Layout" transform="translate(150, 110)">
+        
+        <!-- LEFT: INFINITE SPIRAL 3D COLUMN -->
+        <g id="InfiniteSpiral-Column" transform="translate(0, 0)">
+            <!-- Outer Spiral Container Track -->
+            <rect width="380" height="740" rx="20" fill="#ECEBE6" fill-opacity="0.5" stroke="#D9D9D4"/>
+            <text x="190" y="35" text-anchor="middle" fill="#777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">INFINITE SPIRAL CYLINDER</text>
+
+            <!-- Card Stack along Spiral -->
+            <g transform="translate(190, 370)">
+                <!-- Top Card -->
+                <g transform="translate(-60, -220) rotate(-14) scale(0.85)">
+                    <rect width="120" height="120" rx="14" fill="#222" stroke="#FFF" stroke-width="2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11">Desert Light</text>
+                </g>
+                <!-- Upper Card -->
+                <g transform="translate(20, -140) rotate(10) scale(0.95)">
+                    <rect width="120" height="120" rx="14" fill="#2E2E2E" stroke="#FFF" stroke-width="2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11">Green Meadow</text>
+                </g>
+                <!-- Center Zoom Focus Card -->
+                <g transform="translate(-70, -40) scale(1.2)">
+                    <rect width="120" height="120" rx="14" fill="#111" stroke="#2A4365" stroke-width="3" filter="drop-shadow(0 15px 30px rgba(0,0,0,0.25))"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="12" font-weight="700">Mountain Lake</text>
+                </g>
+                <!-- Lower Card -->
+                <g transform="translate(30, 80) rotate(-8) scale(1.0)">
+                    <rect width="120" height="120" rx="14" fill="#252525" stroke="#FFF" stroke-width="2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11">Forest Path</text>
+                </g>
+                <!-- Bottom Card -->
+                <g transform="translate(-50, 190) rotate(12) scale(0.85)">
+                    <rect width="120" height="120" rx="14" fill="#1C1C1C" stroke="#FFF" stroke-width="2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="11">Rocky Summit</text>
+                </g>
+            </g>
+            <text x="190" y="715" text-anchor="middle" fill="#999" font-family="Poppins, sans-serif" font-size="10">Auto-Rotating 3D Vertical Cylinder</text>
+        </g>
+
+        <!-- RIGHT: EDITORIAL HEADLINE & PARAGRAPH (FROM USER'S ZIP) -->
+        <g id="Editorial-Content" transform="translate(430, 80)">
+            <text x="0" y="0" fill="#777777" font-family="Poppins, sans-serif" font-size="11.5" font-weight="600" letter-spacing="2">ABOUT THE EXPERIMENT</text>
+            
+            <!-- 3-Line Heading -->
+            <text x="0" y="50" fill="#111111" font-family="Poppins, sans-serif" font-size="34" font-weight="800" line-height="1.2">From Human-Made to AI-Generated:</text>
+            <text x="0" y="92" fill="#111111" font-family="Poppins, sans-serif" font-size="34" font-weight="800">Exploring How Creative Content</text>
+            <text x="0" y="134" fill="#111111" font-family="Poppins, sans-serif" font-size="34" font-weight="800">Influences Audience Perception.</text>
+
+            <!-- Combined Paragraph -->
+            <g transform="translate(0, 180)">
+                <text x="0" y="0" fill="#444" font-family="Poppins, sans-serif" font-size="14.5" line-height="1.7">
+                    <tspan x="0" dy="0">In an era where machine synthesis achieves photorealistic precision,</tspan>
+                    <tspan x="0" dy="28">this experiment was designed to investigate whether human audiences</tspan>
+                    <tspan x="0" dy="28">can intuitively discern physical craftsmanship from generative algorithms</tspan>
+                    <tspan x="0" dy="28">when all creator metadata, prompts, and provenance tags are stripped away.</tspan>
+                    <tspan x="0" dy="38">Through 15 matched subjects spanning beginner wildlife photography,</tspan>
+                    <tspan x="0" dy="28">intermediate fine-art oil glazing, and advanced commercial caustics,</tspan>
+                    <tspan x="0" dy="28">participants uncover the subtle psychological heuristics—from perceived</tspan>
+                    <tspan x="0" dy="28">effort to texture grain—that truly govern aesthetic value.</tspan>
+                </text>
+            </g>
+
+            <!-- Feature Points Grid -->
+            <g transform="translate(0, 430)">
+                <rect x="0" y="0" width="320" height="90" rx="14" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="18" y="28" fill="#2A4365" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">01 / BLIND OBSERVATION</text>
+                <text x="18" y="52" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Zero Metadata Bias</text>
+                <text x="18" y="70" fill="#777" font-family="Poppins, sans-serif" font-size="11">Evaluated purely on visual pixels.</text>
+
+                <rect x="340" y="0" width="320" height="90" rx="14" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="358" y="28" fill="#2A4365" font-family="Poppins, sans-serif" font-size="10.5" font-weight="700">02 / 3 CALIBRATED TIERS</text>
+                <text x="358" y="52" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="600">Beginner to Advanced</text>
+                <text x="358" y="70" fill="#777" font-family="Poppins, sans-serif" font-size="11">Progressive perceptual complexity.</text>
+            </g>
+
+            <!-- CTA -->
+            <g transform="translate(0, 560)">
+                <rect width="220" height="48" rx="24" fill="#111"/>
+                <text x="110" y="29" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="12" font-weight="700">START THE TEST →</text>
+            </g>
+        </g>
+    </g>
+
+    
+    <g id="Footer" transform="translate(0, 910)">
+        <line x1="150" y1="0" x2="1290" y2="0" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="35" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">HUMAN OR AI? — Interactive Visual Experiment</text>
+        <text x="1290" y="35" text-anchor="end" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">Interactive Design Prototype</text>
+    </g>
+    
+</svg>
+      </div>
+    </div>
+    
+    <div class="artboard-container">
+      <div class="flex items-center justify-between pb-3 border-b border-[#D5D4CE] mb-4">
+        <div>
+          <h2 class="text-base font-bold text-[#111111]">06. Contact & Discussions (1440 × 940)</h2>
+          <p class="text-xs text-[#777777]">Inquiry form & project disclosures card</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="copySvgToClipboard('PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDEwMjAiIHdpZHRoPSIxNDQwIiBoZWlnaHQ9IjEwMjAiIGZpbGw9Im5vbmUiPgogICAgPHJlY3Qgd2lkdGg9IjE0NDAiIGhlaWdodD0iMTAyMCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgCiAgICA8ZyBpZD0iSGVhZGVyIj4KICAgICAgICA8cmVjdCB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0Y1RjRFRiIvPgogICAgICAgIDxsaW5lIHgxPSIwIiB5MT0iNjQiIHgyPSIxNDQwIiB5Mj0iNjQiIHN0cm9rZT0iI0Q5RDlENCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgICAgICAgPHRleHQgeD0iMTUwIiB5PSIzOCIgZmlsbD0iIzExMTExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxLjIiPkhVTUFOIDx0c3BhbiBmb250LWZhbWlseT0iTmV3c3JlYWRlciwgR2VvcmdpYSwgc2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0iIzc3Nzc3NyI+T1I8L3RzcGFuPiBBST88L3RleHQ+CiAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9Ijk2MCIgeT0iMzYiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+SE9NRTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEwMjQiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPlRIRSBURVNUPC90ZXh0PgogICAgICAgICAgICAKICAgICAgICAgICAgPHRleHQgeD0iMTEyNCIgeT0iMzYiIGZpbGw9IiM3Nzc3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMSI+TElCUkFSWTwvdGV4dD4KICAgICAgICAgICAgCiAgICAgICAgICAgIDx0ZXh0IHg9IjEyMTUiIHk9IjM2IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPkFCT1VUPC90ZXh0PgogICAgICAgICAgICAKICAgICAgICAgICAgPHJlY3QgeD0iMTI3NiIgeT0iMTgiIHdpZHRoPSI4NyIgaGVpZ2h0PSIyOCIgcng9IjE0IiBmaWxsPSIjMTExMTExIi8+CiAgICAgICAgICAgIDx0ZXh0IHg9IjEyODgiIHk9IjM2IiBmaWxsPSIjRjVGNEVGIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPkNPTlRBQ1Q8L3RleHQ+CiAgICAgICAgICAgIAogICAgPC9nPgogICAgCgogICAgPGcgaWQ9IkNvbnRhY3QtQ29udGVudCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjUwLCA5NSkiPgogICAgICAgIDx0ZXh0IHg9IjAiIHk9IjIwIiBmaWxsPSIjMkE0MzY1IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEuNSI+Q09OTkVDVCAmYW1wOyBGRUVEQkFDSzwvdGV4dD4KICAgICAgICA8dGV4dCB4PSIwIiB5PSI1NSIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI4MDAiPkNPTlRBQ1QgJmFtcDsgRElTQ1VTU0lPTjwvdGV4dD4KICAgICAgICA8dGV4dCB4PSIwIiB5PSI4NSIgZmlsbD0iIzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMuNSI+SGF2ZSBmZWVkYmFjayBvbiB0aGUgZXhwZXJpbWVudCwgd2FudCB0byBzdWdnZXN0IG5ldyB0ZXN0IHN1YmplY3RzLCBvciBkaXNjdXNzIGNyZWF0aXZlIHJlc2VhcmNoPyBTZW5kIGEgbWVzc2FnZSBiZWxvdy48L3RleHQ+CiAgICAgICAgPGxpbmUgeDE9IjAiIHkxPSIxMDUiIHgyPSI5NDAiIHkyPSIxMDUiIHN0cm9rZT0iI0Q5RDlENCIvPgoKICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLCAxMzApIj4KICAgICAgICAgICAgPCEtLSBMZWZ0IEZvcm0gLS0+CiAgICAgICAgICAgIDxnIGlkPSJGb3JtIj4KICAgICAgICAgICAgICAgIDxyZWN0IHdpZHRoPSI1MzAiIGhlaWdodD0iNTIwIiByeD0iMjAiIGZpbGw9IiNGRkYiIHN0cm9rZT0iI0Q5RDlENCIvPgogICAgICAgICAgICAgICAgPHRleHQgeD0iMjgiIHk9IjQyIiBmaWxsPSIjMTExIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjcwMCI+TkFNRTwvdGV4dD4KICAgICAgICAgICAgICAgIDxyZWN0IHg9IjI4IiB5PSI1MiIgd2lkdGg9IjQ3NCIgaGVpZ2h0PSI0MiIgcng9IjEwIiBmaWxsPSIjRjVGNEVGIiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjQ0IiB5PSI3OCIgZmlsbD0iIzk5OSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiPllvdXIgZnVsbCBuYW1lPC90ZXh0PgoKICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjI4IiB5PSIxMjIiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNzAwIj5FTUFJTDwvdGV4dD4KICAgICAgICAgICAgICAgIDxyZWN0IHg9IjI4IiB5PSIxMzIiIHdpZHRoPSI0NzQiIGhlaWdodD0iNDIiIHJ4PSIxMCIgZmlsbD0iI0Y1RjRFRiIgc3Ryb2tlPSIjRDlEOUQ0Ii8+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSI0NCIgeT0iMTU4IiBmaWxsPSIjOTk5IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyI+bmFtZUBkb21haW4uY29tPC90ZXh0PgoKICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjI4IiB5PSIyMDIiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNzAwIj5TVUJKRUNUPC90ZXh0PgogICAgICAgICAgICAgICAgPHJlY3QgeD0iMjgiIHk9IjIxMiIgd2lkdGg9IjQ3NCIgaGVpZ2h0PSI0MiIgcng9IjEwIiBmaWxsPSIjRjVGNEVGIiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjQ0IiB5PSIyMzgiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIj5HZW5lcmFsIElucXVpcnk8L3RleHQ+CgogICAgICAgICAgICAgICAgPHRleHQgeD0iMjgiIHk9IjI4MiIgZmlsbD0iIzExMSIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI3MDAiPk1FU1NBR0U8L3RleHQ+CiAgICAgICAgICAgICAgICA8cmVjdCB4PSIyOCIgeT0iMjkyIiB3aWR0aD0iNDc0IiBoZWlnaHQ9IjEyMCIgcng9IjEwIiBmaWxsPSIjRjVGNEVGIiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjQ0IiB5PSIzMjIiIGZpbGw9IiM5OTkiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIj5Xcml0ZSB5b3VyIG1lc3NhZ2UgaGVyZS4uLjwvdGV4dD4KCiAgICAgICAgICAgICAgICA8cmVjdCB4PSIyOCIgeT0iNDM1IiB3aWR0aD0iNDc0IiBoZWlnaHQ9IjQ2IiByeD0iMTIiIGZpbGw9IiMxMTEiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjI2NSIgeT0iNDYzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkZGIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMi41IiBmb250LXdlaWdodD0iNzAwIj5TRU5EIE1FU1NBR0Ug4oaSPC90ZXh0PgogICAgICAgICAgICA8L2c+CgogICAgICAgICAgICA8IS0tIFJpZ2h0IFNpZGViYXI6IFByb2plY3QgRGlzY2xvc3VyZXMgKEZyb20gVXNlcidzIFppcCkgLS0+CiAgICAgICAgICAgIDxnIGlkPSJEaXNjbG9zdXJlcyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTYwLCAwKSI+CiAgICAgICAgICAgICAgICA8cmVjdCB3aWR0aD0iMzgwIiBoZWlnaHQ9IjM2MCIgcng9IjE4IiBmaWxsPSIjRkZGIiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjI0IiB5PSIzOCIgZmlsbD0iIzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxIj5QUk9KRUNUIERJU0NMT1NVUkVTPC90ZXh0PgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICA8dGV4dCB4PSIyNCIgeT0iNzUiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIj5IVU1BTiBPUiBBST8gU3R1ZHk8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIyNCIgeT0iOTgiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyLjUiPkluZGVwZW5kZW50IHJlc2VhcmNoIG9uIHZpc3VhbCBsaXRlcmFjeSwgcGVyY2VwdHVhbCBiaWFzLDwvdGV4dD4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjI0IiB5PSIxMTgiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyLjUiPmFuZCBhcnRpZmljaWFsIGludGVsbGlnZW5jZSBpbiBjcmVhdGl2ZSBwcmFjdGljZS48L3RleHQ+CgogICAgICAgICAgICAgICAgPGxpbmUgeDE9IjI0IiB5MT0iMTQ1IiB4Mj0iMzU2IiB5Mj0iMTQ1IiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjI0IiB5PSIxNzUiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNzAwIj5ESVJFQ1QgQ09SUkVTUE9OREVOQ0U8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIyNCIgeT0iMTk4IiBmaWxsPSIjMTExIiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjYwMCI+cmVzZWFyY2hAaHVtYW5vcmFpLmV4cGVyaW1lbnQ8L3RleHQ+CgogICAgICAgICAgICAgICAgPGxpbmUgeDE9IjI0IiB5MT0iMjI1IiB4Mj0iMzU2IiB5Mj0iMjI1IiBzdHJva2U9IiNEOUQ5RDQiLz4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjI0IiB5PSIyNTUiIGZpbGw9IiMxMTEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIj5EQVRBU0VUIElOVEVHUklUWTwvdGV4dD4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjI0IiB5PSIyNzgiIGZpbGw9IiM3NzciIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyLjUiPkFsbCBodW1hbiBzdWJqZWN0cyBhcmUgdmVyaWZpZWQgYXV0aGVudGljIGxlbnMgYW5kPC90ZXh0PgogICAgICAgICAgICAgICAgPHRleHQgeD0iMjQiIHk9IjI5OCIgZmlsbD0iIzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIuNSI+YnJ1c2h3b3JrIHdvcmtzLiBBbGwgQUkgc3ViamVjdHMgYXJlIHJlY29yZGVkIHdpdGg8L3RleHQ+CiAgICAgICAgICAgICAgICA8dGV4dCB4PSIyNCIgeT0iMzE4IiBmaWxsPSIjNzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMi41Ij5nZW5lcmF0aW9uIHBhcmFtZXRlcnMuPC90ZXh0PgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgoKICAgIAogICAgPGcgaWQ9IkZvb3RlciIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwgOTQwKSI+CiAgICAgICAgPGxpbmUgeDE9IjE1MCIgeTE9IjAiIHgyPSIxMjkwIiB5Mj0iMCIgc3Ryb2tlPSIjRDlEOUQ0IiBzdHJva2Utd2lkdGg9IjEiLz4KICAgICAgICA8dGV4dCB4PSIxNTAiIHk9IjM1IiBmaWxsPSIjNzc3Nzc3IiBmb250LWZhbWlseT0iUG9wcGlucywgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjQwMCI+SFVNQU4gT1IgQUk/IOKAlCBJbnRlcmFjdGl2ZSBWaXN1YWwgRXhwZXJpbWVudDwvdGV4dD4KICAgICAgICA8dGV4dCB4PSIxMjkwIiB5PSIzNSIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzc3Nzc3NyIgZm9udC1mYW1pbHk9IlBvcHBpbnMsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI0MDAiPkludGVyYWN0aXZlIERlc2lnbiBQcm90b3R5cGU8L3RleHQ+CiAgICA8L2c+CiAgICAKPC9zdmc+', '06. Contact & Discussions (1440 × 940)')" class="bg-[#111111] hover:bg-[#2A4365] text-white text-xs font-semibold px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            Copy for Figma (Ctrl+V)
+          </button>
+          <a href="/figma-export/06_contact_discussions.svg" download="06_contact_discussions.svg" class="bg-white border border-[#D9D9D4] hover:bg-gray-50 text-[#111] text-xs font-medium px-3.5 py-2 rounded-xl transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Download SVG
+          </a>
+        </div>
+      </div>
+      <div class="svg-canvas">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1020" width="1440" height="1020" fill="none">
+    <rect width="1440" height="1020" fill="#F5F4EF"/>
+    
+    <g id="Header">
+        <rect width="1440" height="64" fill="#F5F4EF"/>
+        <line x1="0" y1="64" x2="1440" y2="64" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="38" fill="#111111" font-family="Poppins, sans-serif" font-size="14" font-weight="700" letter-spacing="1.2">HUMAN <tspan font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="400" fill="#777777">OR</tspan> AI?</text>
+        
+            <text x="960" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">HOME</text>
+            
+            <text x="1024" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">THE TEST</text>
+            
+            <text x="1124" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">LIBRARY</text>
+            
+            <text x="1215" y="36" fill="#777777" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">ABOUT</text>
+            
+            <rect x="1276" y="18" width="87" height="28" rx="14" fill="#111111"/>
+            <text x="1288" y="36" fill="#F5F4EF" font-family="Poppins, sans-serif" font-size="11" font-weight="600" letter-spacing="1">CONTACT</text>
+            
+    </g>
+    
+
+    <g id="Contact-Content" transform="translate(250, 95)">
+        <text x="0" y="20" fill="#2A4365" font-family="Poppins, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">CONNECT &amp; FEEDBACK</text>
+        <text x="0" y="55" fill="#111" font-family="Poppins, sans-serif" font-size="34" font-weight="800">CONTACT &amp; DISCUSSION</text>
+        <text x="0" y="85" fill="#777" font-family="Poppins, sans-serif" font-size="13.5">Have feedback on the experiment, want to suggest new test subjects, or discuss creative research? Send a message below.</text>
+        <line x1="0" y1="105" x2="940" y2="105" stroke="#D9D9D4"/>
+
+        <g transform="translate(0, 130)">
+            <!-- Left Form -->
+            <g id="Form">
+                <rect width="530" height="520" rx="20" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="28" y="42" fill="#111" font-family="Poppins, sans-serif" font-size="11" font-weight="700">NAME</text>
+                <rect x="28" y="52" width="474" height="42" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="44" y="78" fill="#999" font-family="Poppins, sans-serif" font-size="13">Your full name</text>
+
+                <text x="28" y="122" fill="#111" font-family="Poppins, sans-serif" font-size="11" font-weight="700">EMAIL</text>
+                <rect x="28" y="132" width="474" height="42" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="44" y="158" fill="#999" font-family="Poppins, sans-serif" font-size="13">name@domain.com</text>
+
+                <text x="28" y="202" fill="#111" font-family="Poppins, sans-serif" font-size="11" font-weight="700">SUBJECT</text>
+                <rect x="28" y="212" width="474" height="42" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="44" y="238" fill="#111" font-family="Poppins, sans-serif" font-size="13">General Inquiry</text>
+
+                <text x="28" y="282" fill="#111" font-family="Poppins, sans-serif" font-size="11" font-weight="700">MESSAGE</text>
+                <rect x="28" y="292" width="474" height="120" rx="10" fill="#F5F4EF" stroke="#D9D9D4"/>
+                <text x="44" y="322" fill="#999" font-family="Poppins, sans-serif" font-size="13">Write your message here...</text>
+
+                <rect x="28" y="435" width="474" height="46" rx="12" fill="#111"/>
+                <text x="265" y="463" text-anchor="middle" fill="#FFF" font-family="Poppins, sans-serif" font-size="12.5" font-weight="700">SEND MESSAGE →</text>
+            </g>
+
+            <!-- Right Sidebar: Project Disclosures (From User's Zip) -->
+            <g id="Disclosures" transform="translate(560, 0)">
+                <rect width="380" height="360" rx="18" fill="#FFF" stroke="#D9D9D4"/>
+                <text x="24" y="38" fill="#777" font-family="Poppins, sans-serif" font-size="11" font-weight="700" letter-spacing="1">PROJECT DISCLOSURES</text>
+                
+                <text x="24" y="75" fill="#111" font-family="Poppins, sans-serif" font-size="14" font-weight="700">HUMAN OR AI? Study</text>
+                <text x="24" y="98" fill="#777" font-family="Poppins, sans-serif" font-size="12.5">Independent research on visual literacy, perceptual bias,</text>
+                <text x="24" y="118" fill="#777" font-family="Poppins, sans-serif" font-size="12.5">and artificial intelligence in creative practice.</text>
+
+                <line x1="24" y1="145" x2="356" y2="145" stroke="#D9D9D4"/>
+                <text x="24" y="175" fill="#777" font-family="Poppins, sans-serif" font-size="11" font-weight="700">DIRECT CORRESPONDENCE</text>
+                <text x="24" y="198" fill="#111" font-family="Poppins, sans-serif" font-size="13" font-weight="600">research@humanorai.experiment</text>
+
+                <line x1="24" y1="225" x2="356" y2="225" stroke="#D9D9D4"/>
+                <text x="24" y="255" fill="#111" font-family="Poppins, sans-serif" font-size="12" font-weight="700">DATASET INTEGRITY</text>
+                <text x="24" y="278" fill="#777" font-family="Poppins, sans-serif" font-size="12.5">All human subjects are verified authentic lens and</text>
+                <text x="24" y="298" fill="#777" font-family="Poppins, sans-serif" font-size="12.5">brushwork works. All AI subjects are recorded with</text>
+                <text x="24" y="318" fill="#777" font-family="Poppins, sans-serif" font-size="12.5">generation parameters.</text>
+            </g>
+        </g>
+    </g>
+
+    
+    <g id="Footer" transform="translate(0, 940)">
+        <line x1="150" y1="0" x2="1290" y2="0" stroke="#D9D9D4" stroke-width="1"/>
+        <text x="150" y="35" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">HUMAN OR AI? — Interactive Visual Experiment</text>
+        <text x="1290" y="35" text-anchor="end" fill="#777777" font-family="Poppins, sans-serif" font-size="12" font-weight="400">Interactive Design Prototype</text>
+    </g>
+    
+</svg>
+      </div>
+    </div>
+    
+  </div>
+
+  <script>
+    function copySvgToClipboard(b64, title) {
+      try {
+        const svgText = atob(b64);
+        
+        // Write as text/plain and text/html so Figma's vector parser immediately triggers
+        if (navigator.clipboard && navigator.clipboard.write) {
+          const textBlob = new Blob([svgText], { type: 'text/plain' });
+          const htmlBlob = new Blob([svgText], { type: 'text/html' });
+          const item = new ClipboardItem({
+            'text/plain': textBlob,
+            'text/html': htmlBlob
+          });
+          navigator.clipboard.write([item]).then(() => {
+            showToast('Copied ' + title + '! Switch to Figma and press Ctrl+V / ⌘V.');
+          }).catch(err => {
+            // fallback
+            fallbackCopy(svgText, title);
+          });
+        } else {
+          fallbackCopy(svgText, title);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function fallbackCopy(text, title) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Copied ' + title + '! Switch to Figma and press Ctrl+V / ⌘V.');
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Copied ' + title + '! Switch to Figma and press Ctrl+V / ⌘V.');
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      text.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
